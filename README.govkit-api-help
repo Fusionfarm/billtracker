@@ -1,0 +1,14 @@
+Searching bills
+
+NOTE: Bill searches only return a limited set of bill attributes, a find must be done to retrieve the full bill information
+
+By keyword and state
+GovKit::OpenStates::Bill.search('residential', :state => 'ia')
+
+By keyword, state and chamber
+GovKit::OpenStates::Bill.search('residential', :state => 'ia', :chamber => 'upper')
+
+Retrieving a bill
+
+By state, session and bill id
+rb2 = GovKit::OpenStates::Bill.find('IA', '2011-2012', 'HF 2115')

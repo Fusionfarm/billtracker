@@ -1,0 +1,24 @@
+if defined? GovKit
+  GovKit.configure do |config|
+    # Get an API key for Sunlight's Open States project here:
+    # http://services.sunlightlabs.com/accounts/register/
+    config.sunlight_apikey = ENV['SUNLIGHT_API_KEY']
+
+    ##API key for Votesmart
+    # http://votesmart.org/services_api.php
+    config.votesmart_apikey = ENV['VOTESMART_API_KEY']
+
+    # API key for NIMSP. Request one here:
+    # http://www.followthemoney.org/membership/settings.phtml
+    config.ftm_apikey = ENV['FTM_API_KEY']
+
+    # Technorati API key
+    # config.technorati_apikey = 'YOUR_TECHNORATI_APIKEY'
+
+    # Bing App ID
+    config.bing_appid = ENV['BING_APPID']
+
+    # Other things you could set here include alternate URLs for
+    # the APIs. See GovKit::Configuration for available attributes.
+  end
+end

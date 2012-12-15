@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215014619) do
+ActiveRecord::Schema.define(:version => 20121215020042) do
+
+  create_table "mentions", :force => true do |t|
+    t.string   "url",           :limit => 8000
+    t.string   "excerpt",       :limit => 4000
+    t.string   "title",         :limit => 1000
+    t.string   "source"
+    t.datetime "date"
+    t.float    "weight"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "search_source"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
