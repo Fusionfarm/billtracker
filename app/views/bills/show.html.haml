@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Ext bill:
+  = @bill.ext_bill_id
+%p
+  %b Reporter description:
+  = @bill.reporter_description
+%p
+  %b Bill data:
+  = @bill.bill_data
+
+= link_to 'Edit', edit_bill_path(@bill)
+\|
+= link_to 'Back', bills_path

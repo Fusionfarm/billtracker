@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215020042) do
+ActiveRecord::Schema.define(:version => 20121219203846) do
+
+  create_table "bills", :force => true do |t|
+    t.string   "ext_bill_id"
+    t.text     "reporter_description"
+    t.text     "bill_data"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "state"
+    t.string   "session"
+  end
 
   create_table "mentions", :force => true do |t|
     t.string   "url",           :limit => 8000
