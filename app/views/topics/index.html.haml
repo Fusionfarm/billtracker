@@ -1,0 +1,19 @@
+%h1 Listing topics
+
+%table.table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @topics.each do |topic|
+    %tr
+      %td= topic.name
+      %td= link_to 'Show', topic
+      %td= link_to 'Edit', edit_topic_path(topic)
+      %td= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Topic', new_topic_path

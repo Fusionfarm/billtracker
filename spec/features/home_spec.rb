@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'debugger'
 
-describe "Bills" do
+describe "Home" do
   context "when user logged in" do
     def sign_in_as_user user
       visit new_user_session_path
@@ -13,11 +14,12 @@ describe "Bills" do
       sign_in_as_user FactoryGirl.create(:user)
     end
 
-    describe "GET /bills" do
-      it "works! (now write some real specs)" do
+    describe "GET /" do
+      it "has correct navigation" do
         # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-        visit bills_path
-        page.should have_content "Listing bills"
+        visit root_path
+        page.should have_link("Bills", :href => bills_path)
+        page.should have_link("Topics", :href => topics_path)
       end
     end
   end
