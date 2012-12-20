@@ -1,10 +1,11 @@
 %h1 Listing bills
 
-%table
+%table.table
   %tr
-    %th Ext bill
+    %th Bill #
+    %th State
+    %th Session
     %th Reporter description
-    %th Bill data
     %th
     %th
     %th
@@ -12,8 +13,9 @@
   - @bills.each do |bill|
     %tr
       %td= bill.ext_bill_id
+      %td= bill.state
+      %td= bill.session
       %td= bill.reporter_description
-      %td= bill.bill_data
       %td= link_to 'Show', bill
       %td= link_to 'Edit', edit_bill_path(bill)
       %td= link_to 'Destroy', bill, method: :delete, data: { confirm: 'Are you sure?' }

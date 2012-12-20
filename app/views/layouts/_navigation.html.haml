@@ -1,14 +1,25 @@
-= link_to "Billtracker", root_path, :class => 'brand'
-%ul.nav
-  - if user_signed_in?
-    %li
-      = link_to 'Logout', destroy_user_session_path, :method=>'delete'
-  - else
-    %li
-      = link_to 'Login', new_user_session_path
-  - if user_signed_in?
-    %li
-      = link_to 'Edit account', edit_user_registration_path
-  - else
-    %li
-      = link_to 'Sign up', new_user_registration_path
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => root_path} Home
+      .nav-collapse
+        %ul.nav
+          - if user_signed_in?
+            %li
+              = link_to 'Bills', bills_path
+            %li
+              = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+          - else
+            %li
+              = link_to 'Login', new_user_session_path
+          - if user_signed_in?
+            %li
+              = link_to 'Edit account', edit_user_registration_path
+          - else
+            %li
+              = link_to 'Sign up', new_user_registration_path
+      / /.nav-collapse= link_to "Billtracker", root_path, :class => 'brand'

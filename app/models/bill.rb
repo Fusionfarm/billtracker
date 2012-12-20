@@ -3,8 +3,10 @@ class Bill < ActiveRecord::Base
 
   validates_presence_of :ext_bill_id, :state, :session
 
-  def fetch
-    # grab data from openstates and update self
-    bill = GovKit::OpenStates::Bill.find('IA', '2011-2012', 'HF 2115')
+
+
+  def fetch_from_openstates
+    bill = GovKit::OpenStates::Bill.find(self.state, self.session, self.ext_bill_id)
+    bill.raw_response.parsed_response
   end
 end

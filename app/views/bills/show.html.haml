@@ -1,14 +1,22 @@
 %p#notice= notice
 
 %p
-  %b Ext bill:
+  %b Bill #:
   = @bill.ext_bill_id
+%p
+%p
+  %b State:
+  = @bill.state
+%p
+  %b Session:
+  = @bill.session
 %p
   %b Reporter description:
   = @bill.reporter_description
 %p
   %b Bill data:
-  = @bill.bill_data
+  %pre.json
+    = @bill.bill_data
 
 = link_to 'Edit', edit_bill_path(@bill)
 \|

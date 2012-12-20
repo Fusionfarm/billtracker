@@ -24,3 +24,9 @@ gem "better_errors", ">= 0.2.0", :group => :development
 gem "binding_of_caller", ">= 0.6.8", :group => :development
 gem "govkit", ">= 0.7.4"
 gem "awesome_print", :group => :development
+gem "guard-rspec", :group => :development
+gem "rb-inotify", :group => :development
+gem "capybara", :group => :development
+gem "bootstrap-sass"
+gem "webmock", :group => :development
+gem "debugger", :group => :development

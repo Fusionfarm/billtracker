@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'debugger'
 
 describe Bill do
   before { @bill = FactoryGirl.build(:bill) }
@@ -26,13 +27,9 @@ describe Bill do
     end
   end
 
-  describe "fetch" do
-    pending "updates data from openstates" do
-      @bill = FactoryGirl.build(:bill)
-      @bill.fetch
-      @bill.ext_bill_id.should == "HF 1234"
-      @bill.reporter_description.should == "A bill to make hunting penguins illegal"
-      @bill.bill_data.should == "{ \"some\": \"json\" }"
+  describe "fetch_from_openstates" do
+    it "returns bill data from openstates" do
+      pending("TODO: update web mock")
     end
   end
 
