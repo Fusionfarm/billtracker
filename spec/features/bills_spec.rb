@@ -14,10 +14,25 @@ describe "Bills" do
     end
 
     describe "GET /bills" do
-      it "works! (now write some real specs)" do
+      it "returns a list of bills" do
         # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
         visit bills_path
         page.should have_content "Listing bills"
+      end
+    end
+
+    describe "GET /bills/new" do
+      it "shows the new bill form" do
+        visit new_bill_path
+        page.should have_selector "#new_bill"
+      end
+    end
+
+    describe "GET /bills/:id/fetch" do
+      it "updates the bill data" do
+        @bill = Bill.create FactoryGirl.attributes_for(:bill)
+        visit fetch_bill_path(@bill)
+        current_path.should eq(bill_path(@bill))
       end
     end
   end

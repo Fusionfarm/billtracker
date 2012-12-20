@@ -2,7 +2,9 @@ Billtracker::Application.routes.draw do
   resources :topics
 
 
-  resources :bills
+  resources :bills do
+    get 'fetch', :on => :member
+  end
 
 
   authenticated :user do

@@ -82,4 +82,17 @@ class BillsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def fetch
+    @bill = Bill.find(params[:id])
+
+    bill_data = GovKit::OpenStates::Bill.find(@bill.state, @bill.session, @bill.ext_bill_id)
+    @bill.bill_data = bill_data
+    @bill.save
+
+    respond_to do |format|
+      format.html { redirect_to bill_url(@bill)}
+      format.json { head :no_content }
+    end
+  end
 end

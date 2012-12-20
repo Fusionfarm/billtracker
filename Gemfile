@@ -28,5 +28,5 @@ gem "guard-rspec", :group => :development
 gem "rb-inotify", :group => :development
 gem "capybara", :group => :development
 gem "bootstrap-sass"
-gem "webmock", :group => :development
-gem "debugger", :group => :development
+gem "webmock", :group => :test
+gem "debugger", :group => [:development,:test]
