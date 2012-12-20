@@ -4,4 +4,12 @@ FactoryGirl.define do
   factory :topic do
     name "Hunting"
   end
+
+  factory :topic_education do
+    name "Education"
+  end
+
+  factory :topic_farming do
+    name "Farming"
+  end
 end

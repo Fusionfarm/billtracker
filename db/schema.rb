@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220185554) do
+ActiveRecord::Schema.define(:version => 20121220215639) do
 
   create_table "bills", :force => true do |t|
     t.string   "ext_bill_id"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(:version => 20121220185554) do
     t.string   "state"
     t.string   "session"
   end
+
+  create_table "bills_topics", :id => false, :force => true do |t|
+    t.integer "bill_id"
+    t.integer "topic_id"
+  end
+
+  add_index "bills_topics", ["bill_id", "topic_id"], :name => "index_bills_topics_on_bill_id_and_topic_id"
+  add_index "bills_topics", ["topic_id", "bill_id"], :name => "index_bills_topics_on_topic_id_and_bill_id"
 
   create_table "mentions", :force => true do |t|
     t.string   "url",           :limit => 8000

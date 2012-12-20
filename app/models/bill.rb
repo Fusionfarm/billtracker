@@ -1,5 +1,5 @@
 class Bill < ActiveRecord::Base
-  attr_accessible :bill_data, :ext_bill_id, :state, :session, :reporter_description
+  attr_accessible :bill_data, :ext_bill_id, :state, :session, :reporter_description, :topic_ids
 
   validates_presence_of :ext_bill_id, :state, :session
 

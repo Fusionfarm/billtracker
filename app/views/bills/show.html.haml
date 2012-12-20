@@ -14,6 +14,12 @@
   %b Reporter description:
   = @bill.reporter_description
 %p
+  %b Topics:
+  %ul
+  - @bill.topics.each do |topic|
+    %li
+      = topic.name
+%p
   %b Bill data:
   %pre.json
     = @bill.bill_data

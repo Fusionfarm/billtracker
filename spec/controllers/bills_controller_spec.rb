@@ -20,11 +20,15 @@ require 'spec_helper'
 
 describe BillsController do
 
+  before(:each) do
+    @topics = [Topic.create(:name => "Commerce"), Topic.create(:name => "Regulations")]
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Bill. As you add validations to Bill, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "ext_bill_id" => "HF 1234", "state" => "IA", "session" => "2011-2012" }
+    { "ext_bill_id" => "HF 1234", "state" => "IA", "session" => "2011-2012", "topic_ids" => [@topics[0].id,@topics[1].id] }
   end
 
   # This should return the minimal set of values that should be in the session
