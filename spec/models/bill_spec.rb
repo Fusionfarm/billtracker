@@ -12,6 +12,7 @@ describe Bill do
   it { should respond_to(:session) }
   it { should respond_to(:reporter_description) }
   it { should respond_to(:bill_data) }
+  it { should respond_to(:topics) }
 
   describe "validations" do
     it "requires an ext_bill_id" do
