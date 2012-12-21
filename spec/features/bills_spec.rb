@@ -31,6 +31,8 @@ describe "Bills" do
     describe "GET /bills/:id/fetch" do
       it "updates the bill data" do
         @bill = Bill.create FactoryGirl.attributes_for(:bill)
+        stub_request(:get, "http://openstates.org/api/v1/bills/#{@bill.state.downcase}/#{@bill.session}/#{@bill.ext_bill_id}/?apikey=#{ENV['SUNLIGHT_API_KEY']}").
+         to_return(:status => 200, :body => '{}', :headers => {})
         visit fetch_bill_path(@bill)
         current_path.should eq(bill_path(@bill))
       end

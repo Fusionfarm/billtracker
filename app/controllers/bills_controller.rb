@@ -86,8 +86,7 @@ class BillsController < ApplicationController
   def fetch
     @bill = Bill.find(params[:id])
 
-    bill_data = GovKit::OpenStates::Bill.find(@bill.state, @bill.session, @bill.ext_bill_id)
-    @bill.bill_data = bill_data
+    @bill.bill_data = @bill.fetch_from_openstates
     @bill.save
 
     respond_to do |format|

@@ -254,7 +254,9 @@ DEPENDENCIES
   haml (>= 3.1.7)
   haml-rails (>= 0.3.5)
   hpricot (>= 0.8.6)
+  httparty
   jquery-rails
+  multi_json
   mysql2 (>= 0.3.11)
   quiet_assets (>= 1.0.1)
   rails (= 3.2.9)

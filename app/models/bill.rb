@@ -6,7 +6,7 @@ class Bill < ActiveRecord::Base
   has_and_belongs_to_many :topics
 
   def fetch_from_openstates
-    bill = GovKit::OpenStates::Bill.find(self.state, self.session, self.ext_bill_id)
-    bill.raw_response.parsed_response
+    response = HTTParty.get("http://openstates.org/api/v1/bills/#{self.state.downcase}/#{self.session}/#{URI.escape(self.ext_bill_id)}/?apikey=#{ENV['SUNLIGHT_API_KEY']}")
+    MultiJson.load response.body
   end
 end

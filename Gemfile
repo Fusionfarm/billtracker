@@ -30,3 +30,5 @@ gem "capybara", :group => :development
 gem "bootstrap-sass"
 gem "webmock", :group => :test
 gem "debugger", :group => [:development,:test]
+gem "httparty"
+gem "multi_json"
