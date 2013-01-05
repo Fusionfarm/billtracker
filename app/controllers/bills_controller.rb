@@ -86,7 +86,8 @@ class BillsController < ApplicationController
   def fetch
     @bill = Bill.find(params[:id])
 
-    @bill.bill_data = @bill.fetch_from_openstates
+    @bill.bill_data = {} if @bill.bill_data.nil?
+    @bill.bill_data.deep_merge! @bill.fetch_from_openstates
     @bill.save
 
     respond_to do |format|

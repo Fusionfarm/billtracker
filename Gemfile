@@ -31,4 +31,4 @@ gem "bootstrap-sass"
 gem "webmock", :group => :test
 gem "debugger", :group => [:development,:test]
 gem "httparty"
-gem "multi_json"
+gem "multi_json", "~> 1.0"

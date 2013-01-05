@@ -3,6 +3,8 @@ class Bill < ActiveRecord::Base
 
   validates_presence_of :ext_bill_id, :state, :session
 
+  serialize :bill_data, JSON
+
   has_and_belongs_to_many :topics
 
   def fetch_from_openstates
