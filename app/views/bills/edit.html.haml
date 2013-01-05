@@ -2,18 +2,6 @@
 
 = render 'form'
 
-%table.table
-  %tr
-    %th Action
-    %th Date
-    %th Annotation
-
-  - @bill.bill_data["actions"].each do |action|
-    %tr
-      %td= action["action"]
-      %td= Time.parse(action["date"]).strftime "%B %e, %Y"
-      %td= action["annotation"]
-
 = link_to 'Show', @bill
 \|
 = link_to 'Back', bills_path

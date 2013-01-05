@@ -1,4 +1,7 @@
 Billtracker::Application.routes.draw do
+  resources :annotations
+
+
   resources :topics
 
 

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Bill:
+  = @annotation.bill
+%p
+  %b Date:
+  = @annotation.date
+%p
+  %b Action:
+  = @annotation.action
+%p
+  %b Text:
+  = @annotation.text
+%p
+  %b Url:
+  = @annotation.url
+
+= link_to 'Edit', edit_annotation_path(@annotation)
+\|
+= link_to 'Back', annotations_path

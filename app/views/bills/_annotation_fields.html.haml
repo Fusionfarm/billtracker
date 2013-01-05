@@ -1,0 +1,8 @@
+%tr
+  %td= f.object.date
+  %td= f.object.action
+  %td= f.input_field :text, :as => :string
+  %td= f.input_field :url, :as => :string
+  %td
+    = f.input :action, :as => :hidden
+    = f.input :date, :as => :hidden

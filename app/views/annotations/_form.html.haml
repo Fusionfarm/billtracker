@@ -1,0 +1,12 @@
+= simple_form_for(@annotation) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :bill
+    = f.input :date
+    = f.input :action
+    = f.input :text
+    = f.input :url
+
+  .form-actions
+    = f.button :submit

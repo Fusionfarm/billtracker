@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220215639) do
+ActiveRecord::Schema.define(:version => 20130105173209) do
+
+  create_table "annotations", :force => true do |t|
+    t.integer  "bill_id"
+    t.datetime "date"
+    t.string   "action"
+    t.text     "text"
+    t.text     "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "annotations", ["bill_id"], :name => "index_annotations_on_bill_id"
 
   create_table "bills", :force => true do |t|
     t.string   "ext_bill_id"

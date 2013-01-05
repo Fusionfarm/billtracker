@@ -1,0 +1,11 @@
+%h2 Actions
+%fieldset
+  %table.table
+    %tr
+      %th Date
+      %th Action
+      %th Annotation
+      %th Url
+      %th
+    = f.simple_fields_for :annotations do |builder|
+      = render 'annotation_fields', f: builder

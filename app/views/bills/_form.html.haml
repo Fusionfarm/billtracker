@@ -6,7 +6,8 @@
     = f.input :state
     = f.input :session
     = f.input :reporter_description
+    %h2 Topics
     = f.collection_check_boxes :topic_ids, Topic.all_alphabetical, :id, :name
-
+    = render 'annotations', f: f
   .form-actions
     = f.button :submit
