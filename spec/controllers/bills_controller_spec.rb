@@ -75,6 +75,11 @@ describe BillsController do
     end
 
     describe "POST create" do
+      before(:each) do
+        # Just make sure fetch returns something
+        BillFetcher.stub(:fetch).and_return("")
+      end
+
       describe "with valid params" do
         it "creates a new Bill" do
           expect {
