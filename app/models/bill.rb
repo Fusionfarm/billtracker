@@ -10,11 +10,6 @@ class Bill < ActiveRecord::Base
 
   accepts_nested_attributes_for :annotations, :allow_destroy => true
 
-  def fetch_from_openstates
-    response = HTTParty.get("http://openstates.org/api/v1/bills/#{self.state.downcase}/#{self.session}/#{URI.escape(self.ext_bill_id)}/?apikey=#{ENV['SUNLIGHT_API_KEY']}")
-    MultiJson.load response.body
-  end
-
   def annotated
     bill_data['reporter_description'] = reporter_description
     bill_data['topics'] = []

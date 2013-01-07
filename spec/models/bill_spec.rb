@@ -28,10 +28,4 @@ describe Bill do
     end
   end
 
-  describe "fetch_from_openstates" do
-    it "returns bill data from openstates" do
-      pending("TODO: update web mock")
-    end
-  end
-
 end
