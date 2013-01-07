@@ -6,9 +6,9 @@ class Bill < ActiveRecord::Base
   serialize :bill_data, JSON
 
   has_and_belongs_to_many :topics
-  has_many :annotations
+  has_many :annotations, :dependent => :delete_all
 
-  accepts_nested_attributes_for :annotations
+  accepts_nested_attributes_for :annotations, :allow_destroy => true
 
   def fetch_from_openstates
     response = HTTParty.get("http://openstates.org/api/v1/bills/#{self.state.downcase}/#{self.session}/#{URI.escape(self.ext_bill_id)}/?apikey=#{ENV['SUNLIGHT_API_KEY']}")
@@ -22,12 +22,13 @@ class Bill < ActiveRecord::Base
       bill_data['topics'] << topic.name
     end
 
+    #TODO: this seems horribly inefficient - find a better way to map the data sets
     if bill_data['actions']
       bill_data['actions'].each do |action|
         anns = annotations.where(date: action['date'], action: action['action']).limit(1)
         ann = anns[0] if anns.size > 0
         if ann
-          action['annotation'] = ann.text
+          action['text'] = ann.text
           action['url'] = ann.url
         end
       end
@@ -40,6 +41,6 @@ class Bill < ActiveRecord::Base
     anns = Hash[annotations.to_a.map{|ann| "#{ann.date.to_s(:db)}#{ann.action}"}.zip annotations.to_a.map{|ann| ann.attributes}]
     actions = Hash[bill_data['actions'].map{|action| "#{Time.parse(action['date']).to_s(:db)}#{action['action']}"}.zip bill_data['actions'] ]
 
-    actions.deep_merge anns
+    actions.deep_merge(anns).values
   end
 end

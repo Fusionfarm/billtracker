@@ -7,6 +7,7 @@ Billtracker::Application.routes.draw do
 
   resources :bills do
     get 'fetch', :on => :member
+    get 'annotated', :on => :member
   end
 
 

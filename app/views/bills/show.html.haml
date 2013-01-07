@@ -1,5 +1,3 @@
-%p#notice= notice
-
 %p
   %b Bill #:
   = @bill.ext_bill_id
@@ -19,10 +17,20 @@
   - @bill.topics.each do |topic|
     %li
       = topic.name
-%p
-  %b Bill data:
-  %pre.json
-    = @bill.bill_data
+%h2 Actions
+%table.table
+  %tr
+    %th Date
+    %th Action
+    %th Annotation
+    %th Url
+    - @bill.annotations.each do |annotation|
+      %tr
+        %td= annotation.date.to_s(:long_date_only)
+        %td= annotation.action
+        %td= annotation.text
+        %td= annotation.url
+
 = link_to 'Edit', edit_bill_path(@bill)
 \|
 = link_to 'Back', bills_path
