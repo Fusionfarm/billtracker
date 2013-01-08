@@ -2,7 +2,11 @@ class BillFetcher
   def self.fetch bill
     response = HTTParty.get("http://openstates.org/api/v1/bills/#{bill.state.downcase}/#{bill.session}/#{URI.escape(bill.ext_bill_id)}/?apikey=#{ENV['SUNLIGHT_API_KEY']}")
 
-    bill.bill_data = MultiJson.load response.body
+    begin
+      bill.bill_data = MultiJson.load response.body
+    rescue
+      # swallow any parsing errors
+    end
 
     # make sure we have valid data structures
     bill.bill_data = {} if bill.bill_data.nil?
@@ -15,5 +19,11 @@ class BillFetcher
     end
 
     bill.save
+  end
+
+  def self.fetch_all bills
+    bills.each do |bill|
+      self.fetch bill
+    end
   end
 end
