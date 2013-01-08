@@ -47,14 +47,6 @@ describe TopicsController do
       end
     end
 
-    describe "GET show" do
-      it "assigns the requested topic as @topic" do
-        topic = Topic.create! valid_attributes
-        get :show, {:id => topic.to_param}, valid_session
-        assigns(:topic).should eq(topic)
-      end
-    end
-
     describe "GET new" do
       it "assigns a new topic as @topic" do
         get :new, {}, valid_session
@@ -86,7 +78,7 @@ describe TopicsController do
 
         it "redirects to the created topic" do
           post :create, {:topic => valid_attributes}, valid_session
-          response.should redirect_to(Topic.last)
+          response.should redirect_to(topics_url)
         end
       end
 
@@ -128,7 +120,7 @@ describe TopicsController do
         it "redirects to the topic" do
           topic = Topic.create! valid_attributes
           put :update, {:id => topic.to_param, :topic => valid_attributes}, valid_session
-          response.should redirect_to(topic)
+          response.should redirect_to(topics_url)
         end
       end
 
