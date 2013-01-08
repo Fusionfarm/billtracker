@@ -1,5 +1,5 @@
 %tr
-  %td= f.object.date.to_s(:long_date_only)
+  %td= f.object.date ? f.object.date.to_s(:long_date_only) : ''
   %td= f.object.action
   %td= f.input_field :text, :as => :string
   %td= f.input_field :url, :as => :string

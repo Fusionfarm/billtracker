@@ -26,7 +26,7 @@
     %th Url
     - @bill.annotations.each do |annotation|
       %tr
-        %td= annotation.date.to_s(:long_date_only)
+        %td= annotation.date ? annotation.date.to_s(:long_date_only) : ''
         %td= annotation.action
         %td= annotation.text
         %td= annotation.url
