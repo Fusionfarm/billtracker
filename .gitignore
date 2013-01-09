@@ -79,3 +79,5 @@ pickle-email-*.html
 # Ignore capistrano files
 Capfile
 /config/deploy.rb
+
+.rvmrc
