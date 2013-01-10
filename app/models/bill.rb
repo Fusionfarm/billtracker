@@ -19,7 +19,7 @@ class Bill < ActiveRecord::Base
 
     if bill_data['actions']
       bill_data['actions'].each do |action|
-        ann = annotations.to_a.select { |a| a.date.to_s(:db) == action['date'] && a.action == action['action'] }.first
+        ann = annotations.select { |a| a.date.to_s(:db) == action['date'] && a.action == action['action'] }.first
         if ann
           action['text'] = ann.text
           action['url'] = ann.url
