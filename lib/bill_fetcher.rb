@@ -14,8 +14,8 @@ class BillFetcher
 
     # find or create annotations for each action
     bill.bill_data['actions'].each do |action|
-      ann = bill.annotations.where(date: action['date'], action: action['action']).limit(1)
-      bill.annotations.create(date: action['date'], action: action['action']) if ann.size == 0
+      ann = bill.annotations.to_a.select { |a| a.date.to_s(:db) == action['date'] && a.action == action['action'] }.first
+      bill.annotations.create(date: action['date'], action: action['action']) if ann.nil?
     end
 
     bill.save
