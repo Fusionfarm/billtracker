@@ -20,8 +20,7 @@ class Bill < ActiveRecord::Base
     #TODO: this seems horribly inefficient - find a better way to map the data sets
     if bill_data['actions']
       bill_data['actions'].each do |action|
-        anns = annotations.where(date: action['date'], action: action['action']).limit(1)
-        ann = anns[0] if anns.size > 0
+        ann = annotations.where(date: action['date'], action: action['action']).first
         if ann
           action['text'] = ann.text
           action['url'] = ann.url
