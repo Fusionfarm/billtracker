@@ -17,7 +17,6 @@ class Bill < ActiveRecord::Base
       bill_data['topics'] << topic.name
     end
 
-    #TODO: this seems horribly inefficient - find a better way to map the data sets
     if bill_data['actions']
       bill_data['actions'].each do |action|
         ann = annotations.to_a.select { |a| a.date.to_s(:db) == action['date'] && a.action == action['action'] }.first
