@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'debugger'
 
 describe "Bills" do
   context "when user logged in" do
@@ -35,6 +36,19 @@ describe "Bills" do
          to_return(:status => 200, :body => '{}', :headers => {})
         visit fetch_bill_path(@bill)
         current_path.should eq(bill_path(@bill))
+      end
+    end
+
+    describe "GET /bills/:id/annotated.json" do
+      it "gets annotated bill data" do
+        @bill = FactoryGirl.create(:bill_with_annotations)
+        @bill.save
+        visit annotated_bill_path(@bill, :format => :json)
+        page.should have_content "reporter_description"
+        page.should have_content "topics"
+        page.should have_content "actions"
+        page.should have_content "Action 1"
+        page.should have_content "Action 2"
       end
     end
   end
