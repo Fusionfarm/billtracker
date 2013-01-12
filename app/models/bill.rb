@@ -31,10 +31,14 @@ class Bill < ActiveRecord::Base
     bill_data
   end
 
-  def merge_actions
-    anns = Hash[annotations.to_a.map{|ann| "#{ann.date.to_s(:db)}#{ann.action}"}.zip annotations.to_a.map{|ann| ann.attributes}]
-    actions = Hash[bill_data['actions'].map{|action| "#{Time.parse(action['date']).to_s(:db)}#{action['action']}"}.zip bill_data['actions'] ]
-
-    actions.deep_merge(anns).values
+  def list_attributes
+    {
+      :id => id,
+      :ext_bill_id => ext_bill_id,
+      :state => state,
+      :session => session,
+      :reporter_description => reporter_description,
+      :topics => topics.map {|t| t.name}
+    }
   end
 end

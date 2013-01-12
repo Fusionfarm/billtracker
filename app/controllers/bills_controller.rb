@@ -5,10 +5,13 @@ class BillsController < ApplicationController
   # GET /bills.json
   def index
     @bills = Bill.all
+    @bills_simple = @bills.map do |bill|
+      bill.list_attributes
+    end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @bills }
+      format.json { render json: @bills_simple }
     end
   end
 
