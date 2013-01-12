@@ -21,6 +21,15 @@ describe "Bills" do
       end
     end
 
+    describe "GET /bills.js?callback=:callback" do
+      it "returns a list of bills via jsonp" do
+        @bill1 = FactoryGirl.create(:bill_with_annotations, :annotations_count => 2)
+        @bill2 = FactoryGirl.create(:bill_with_annotations, :ext_bill_id => 'QQ 123', :annotations_count => 2)
+        get bills_path(:callback => 'the_callback', :format => :js)
+        response.body.should include 'the_callback'
+      end
+    end
+
     describe "GET /bills/:id/annotated.json" do
       it "gets annotated bill data" do
         @bill = FactoryGirl.create(:bill_with_annotations)
