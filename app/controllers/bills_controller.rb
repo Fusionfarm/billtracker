@@ -12,6 +12,7 @@ class BillsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @bills_simple }
+      format.js { render json: @bills_simple, callback: params[:callback] }
     end
   end
 
