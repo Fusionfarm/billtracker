@@ -99,6 +99,7 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @bill.annotated }
+      format.js { render json: @bill.annotated, :callback => params[:callback] }
     end
   end
 end

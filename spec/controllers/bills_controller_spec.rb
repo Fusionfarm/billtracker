@@ -59,6 +59,14 @@ describe BillsController do
       end
     end
 
+    describe "GET annotated" do
+      it "assigns the requested bill as @bill" do
+        bill = Bill.create! valid_attributes
+        get :show, {:id => bill.to_param}, valid_session
+        assigns(:bill).should eq(bill)
+      end
+    end
+
     describe "GET new" do
       it "assigns a new bill as @bill" do
         get :new, {}, valid_session
