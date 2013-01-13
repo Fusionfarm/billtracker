@@ -43,30 +43,6 @@ describe BillsController do
       sign_in FactoryGirl.create(:user)
     end
 
-    describe "GET index" do
-      it "assigns all bills as @bills" do
-        bill = Bill.create! valid_attributes
-        get :index, {}, valid_session
-        assigns(:bills).should eq([bill])
-      end
-    end
-
-    describe "GET show" do
-      it "assigns the requested bill as @bill" do
-        bill = Bill.create! valid_attributes
-        get :show, {:id => bill.to_param}, valid_session
-        assigns(:bill).should eq(bill)
-      end
-    end
-
-    describe "GET annotated" do
-      it "assigns the requested bill as @bill" do
-        bill = Bill.create! valid_attributes
-        get :show, {:id => bill.to_param}, valid_session
-        assigns(:bill).should eq(bill)
-      end
-    end
-
     describe "GET new" do
       it "assigns a new bill as @bill" do
         get :new, {}, valid_session
@@ -186,17 +162,26 @@ describe BillsController do
 
   context "user is logged out" do
     describe "GET index" do
-      it "redirects to sign in page" do
+      it "assigns all bills as @bills" do
+        bill = Bill.create! valid_attributes
         get :index, {}, valid_session
-        response.should redirect_to(new_user_session_path)
+        assigns(:bills).should eq([bill])
       end
     end
 
     describe "GET show" do
-      it "redirects to sign in page" do
+      it "assigns the requested bill as @bill" do
         bill = Bill.create! valid_attributes
         get :show, {:id => bill.to_param}, valid_session
-        response.should redirect_to(new_user_session_path)
+        assigns(:bill).should eq(bill)
+      end
+    end
+
+    describe "GET annotated" do
+      it "assigns the requested bill as @bill" do
+        bill = Bill.create! valid_attributes
+        get :show, {:id => bill.to_param}, valid_session
+        assigns(:bill).should eq(bill)
       end
     end
 

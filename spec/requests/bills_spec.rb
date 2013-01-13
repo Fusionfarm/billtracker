@@ -2,15 +2,8 @@ require 'spec_helper'
 require 'debugger'
 
 describe "Bills" do
-  context "when user logged in" do
-    def sign_in_as_user user
-      post user_session_path, :user => { :email => user.email, :password => user.password }
-    end
 
-    before(:each) do
-      sign_in_as_user FactoryGirl.create(:user)
-    end
-
+  shared_examples "bill api" do
     describe "GET /bills.json" do
       it "returns a list of bills in json format" do
         @bill1 = FactoryGirl.create(:bill_with_annotations, :annotations_count => 2)
@@ -49,6 +42,21 @@ describe "Bills" do
         response.body.should include "the_callback"
       end
     end
+  end
 
+  context "when user logged in" do
+    def sign_in_as_user user
+      post user_session_path, :user => { :email => user.email, :password => user.password }
+    end
+
+    before(:each) do
+      sign_in_as_user FactoryGirl.create(:user)
+    end
+
+    it_behaves_like "bill api"
+  end
+
+  context "when user logged out" do
+    it_behaves_like "bill api"
   end
 end
