@@ -33,12 +33,13 @@ class Bill < ActiveRecord::Base
 
   def list_attributes
     {
-      :id => id,
-      :ext_bill_id => ext_bill_id,
+      :bill_path => Rails.application.routes.url_helpers.bill_path(self),
+      :bill_id => ext_bill_id,
       :state => state,
       :session => session,
       :reporter_description => reporter_description,
-      :topics => topics.map {|t| t.name}
+      :topics => topics.map {|t| t.name},
+      :action_dates => bill_data.nil? ? {} : bill_data['action_dates']
     }
   end
 end
