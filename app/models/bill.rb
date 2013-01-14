@@ -11,15 +11,15 @@ class Bill < ActiveRecord::Base
   accepts_nested_attributes_for :annotations, :allow_destroy => true
 
   def annotated
-    self.bill_data = { 'actions' => [] } if self.bill_data.nil?
-    self.bill_data['reporter_description'] = reporter_description
-    self.bill_data['topics'] = []
+    self.bill_data = { 'actions' => [] } if bill_data.nil?
+    bill_data['reporter_description'] = reporter_description
+    bill_data['topics'] = []
     topics.each do |topic|
-      self.bill_data['topics'] << topic.name
+      bill_data['topics'] << topic.name
     end
 
-    if self.bill_data['actions']
-      self.bill_data['actions'].each do |action|
+    if bill_data['actions']
+      bill_data['actions'].each do |action|
         ann = annotations.select { |a| a.date.to_s(:db) == action['date'] && a.action == action['action'] }.first
         if ann
           action['text'] = ann.text
