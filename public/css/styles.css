@@ -1,0 +1,292 @@
+body {
+	margin: 0.83%;
+	font-family: 'Helvetica Neue',Helvetica,arial,sans-serif;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#bill_tracker_header {
+	font-size: 32px;
+	font-weight: bold;
+}
+
+#session_header {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#choose_category {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+image {
+	cursor: pointer;
+	preserveAspectRatio: none;
+}
+
+.icons {
+	padding-top: 30px;
+	text-align: center;
+	font-size: 12px;
+}
+
+.circles {
+	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+	font-size: 12px;
+}
+
+#contents_header {
+	border: 1px solid #DDDDDD;
+	background: #EEEEEE;
+	overflow: auto;
+	padding: 2.5%;
+}
+
+section {
+	float: left;
+	margin-top: 1.51515151%; /* 10px ÷ 660px = .01515151 */
+	margin-bottom: 1.51515151%; /* 10px ÷ 660px = .01515151 */
+	width: 63.63636363%; /* 420px ÷ 660px = .63636363 */
+}
+aside {
+	float: right;
+	margin-top: 1.51515151%; /* 10px ÷ 660px = .01515151 */
+	margin-bottom: 1.51515151%; /* 10px ÷ 660px = .01515151 */
+	width: 30.30303030%; /* 200px ÷ 660px = .30303030 */
+}
+
+@media all and (max-width: 360px) {
+	section, aside {
+		float: left;
+		width: auto;
+	}
+	.bill_number_header, .bill_status_img {
+		text-align: center;
+		width: 100%;
+	}
+}
+
+#contents_header_categories {
+	float: left;
+}
+
+#contents_header_topic {
+	float: left;
+}
+
+#contents_header_bill_id {
+	float: left;
+}
+
+.dashes {
+	float: left;
+	padding-left: 2.5%;
+	padding-right: 2.5%;
+	color: #999999;
+}
+
+.loading_content {
+	padding-top: 4.2%;
+}
+
+#billId {
+	padding-top: 4.2%;
+}
+
+.bill_number_header {
+	float: left;
+	margin-right: 2.5%;
+}
+.bill_status_img {
+	margin-top: 0.83%;
+}
+
+#bill_number {
+	font-size: 26px;
+	font-weight: normal;
+}
+
+.headers {
+	font-size: 22px;
+	font-weight: normal;
+}
+
+.votes_headers {
+	font-size: 18px;
+}
+
+.regular_text {
+	font-size: 14px;
+	font-weight: normal;
+}
+
+#chamber {
+	font-size: 10px;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+}
+
+.chamber_black_text {
+	color: #000000;
+}
+.chamber_grey_text {
+	color: #8b8989;
+}
+
+.chamber_black_hr_bar {
+	border-color: #000000;
+	padding: ;
+	margin: 0px;
+	border-width: 2px;
+}
+.chamber_grey_hr_bar {
+	border-color: #8b8989;
+	padding: ;
+	margin: 0px;
+	border-width: 2px;
+}
+
+.arrow_up_black {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid black;
+	margin: auto;
+}
+.arrow_up_grey {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #8b8989;
+	margin: auto;
+}
+
+img {
+	border: 1px solid #CCCCCC;
+}
+
+.action_info_button img {
+	border: 0px;
+	max-width: none;
+}
+
+.action_info_button img:hover {
+	opacity: 0.8;
+}
+
+.reporters_paragraph {
+	border: 1px solid #CCCCCC;
+	padding: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-top: 3px;
+	margin-bottom: 7px;
+	background-color: #EEEEEE;
+}
+
+.house_box {
+	background-color: #433518;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 3px 7px;
+	float: left;
+	margin-right: 5px;
+}
+.senate_box {
+	background-color: #aa591a;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 3px 7px;
+	float: left;
+	margin-right: 5px;
+}
+
+.buttons {
+	font-size: 18px;
+	text-align: center;
+}
+
+.table th, .table td {
+	padding: 0.33%;
+}
+
+.topics {
+	font-size: 26px;
+	font-weight: normal;
+	padding-top: 5%;
+}
+
+.headers_hr {
+	margin: 0px;
+}
+
+.bill_outer {
+	margin: 0.83% 0;
+}
+
+.bill_float_wrap {
+	overflow: auto;
+}
+
+.billId_buttons {
+	float: left;
+	margin: 0 0.83% 2% 0;
+	padding-top: 0.5%;
+	padding-right: 1.3%;
+}
+
+.bill_status_boxes {
+	border: 1px solid #DDDDDD;
+	float: left;
+}
+
+.square_dark_grey {
+    width: 14px;
+    height: 14px;
+    display: block;
+    overflow: hidden;
+	margin: 4px 0px 4px 4px;
+	background-color: #666666;
+	float: left;
+}
+
+.square_light_grey {
+    width: 14px;
+    height: 14px;
+    display: block;
+    overflow: hidden;
+	margin: 4px 0px 4px 4px;
+	background-color: #CCCCCC;
+	float: left;
+}
+
+.passed_text {
+	float: left;
+	margin-top: 2px;
+	margin-left: 7px;
+	margin-right: 4px;
+	font-size: 12px;
+}
+
+.last_updated {
+	text-align: right;
+	margin-top: 0.5%;
+}
+
+
+#credits {
+	font-size: 11px;
+	color: rgb(163, 161, 161);
+	padding-top: 150px;
+	float: left;
+}
