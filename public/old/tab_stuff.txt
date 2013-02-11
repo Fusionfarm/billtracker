@@ -1,0 +1,21 @@
+<ul class="nav nav-tabs" id="my_tab">
+	<li><a>HF 2007</a></li>
+	<li><a>HF 2337</a></li>
+	<li><a>SF 2316</a></li>
+	<li><a>HR 142</a></li>
+	<li><a>SF 2283</a></li>
+</ul>
+
+// Test tab function
+$('#my_tab a').on('click', function (e) {
+	$(e.target).tab('show');
+	selectedBill = $(e.target).text();
+	initialLoadJSON(selectedBill);
+})
+
+// Start it up!
+$(function () {
+	$('#my_tab a:first').tab('show');
+	initialLoadJSON($('#my_tab a:first').text());
+	
+})
