@@ -39,7 +39,8 @@ class Bill < ActiveRecord::Base
       :session => session,
       :reporter_description => reporter_description,
       :topics => topics.map {|t| t.name},
-      :action_dates => bill_data.nil? ? {} : bill_data['action_dates']
+      :action_dates => bill_data.nil? ? {} : bill_data['action_dates'],
+      :chamber => bill_data.nil? ? "" : bill_data['chamber']
     }
   end
 end
