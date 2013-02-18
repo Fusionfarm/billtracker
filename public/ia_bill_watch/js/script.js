@@ -281,71 +281,76 @@ function initialLoadJSON(topic) {
 					
 					// We'll add graphic on page depending on the bills status
 					// This loop will run if bill originated in the lower chamber
-					if (val.chamber = "lower") {
-						if (val.action_dates.passed_lower === null) {
-							billId_init += '<table class="bill_status_boxes"><tr><td>';
-							billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
-							billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
-							billId_init += '<div class="passed_text">INTRODUCED TO HOUSE</div>';
-							billId_init += '</td></tr></table></section>';
-						} else if (val.action_dates.signed !== null) {
-							billId_init += '<table class="bill_status_boxes"><tr><td>';
-							billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
-							billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
-							billId_init += '<div class="passed_text">SIGNED INTO LAW</div>';
-							billId_init += '</td></tr></table></section>';
-						} else if (val.action_dates.passed_upper !== null) {
-							billId_init += '<table class="bill_status_boxes"><tr><td>';
-							billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
-							billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
-							billId_init += '<div class="passed_text">PASSED SENATE</div>';
-							billId_init += '</td></tr></table></section>';
-						} else if (val.action_dates.passed_lower !== null) {
-							billId_init += '<table class="bill_status_boxes"><tr><td>';
-							billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
-							billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
-							billId_init += '<div class="passed_text">PASSED HOUSE</div>';
-							billId_init += '</td></tr></table></section>';
-						}	
-					// This loop will run if bill originated in the upper chamber
-					} else if (val.chamber = "upper") {
-						if (val.action_dates.passed_upper === null) {
-							billId_init += '<table class="bill_status_boxes"><tr><td>';
-							billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
-							billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
-							billId_init += '<div class="passed_text">INTRODUCED TO SENATE</div>';
-							billId_init += '</td></tr></table></section>';
-						} else if (val.action_dates.signed !== null) {
-							billId_init += '<table class="bill_status_boxes"><tr><td>';
-							billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
-							billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
-							billId_init += '<div class="passed_text">SIGNED INTO LAW</div>';
-							billId_init += '</td></tr></table></section>';
-						} else if (val.action_dates.passed_lower !== null) {
-							billId_init += '<table class="bill_status_boxes"><tr><td>';
-							billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
-							billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
-							billId_init += '<div class="passed_text">PASSED HOUSE</div>';
-							billId_init += '</td></tr></table></section>';
-						} else if (val.action_dates.passed_upper !== null) {
-							billId_init += '<table class="bill_status_boxes"><tr><td>';
-							billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
-							billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
-							billId_init += '<div class="passed_text">PASSED SENATE</div>';
-							billId_init += '</td></tr></table></section>';
+					if (val.chamber !== null) {
+						if (val.chamber = "lower") {
+							if (val.action_dates.passed_lower === null) {
+								billId_init += '<table class="bill_status_boxes"><tr><td>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="passed_text">INTRODUCED TO HOUSE</div>';
+								billId_init += '</td></tr></table></section>';
+							} else if (val.action_dates.signed !== null) {
+								billId_init += '<table class="bill_status_boxes"><tr><td>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="passed_text">SIGNED INTO LAW</div>';
+								billId_init += '</td></tr></table></section>';
+							} else if (val.action_dates.passed_upper !== null) {
+								billId_init += '<table class="bill_status_boxes"><tr><td>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="passed_text">PASSED SENATE</div>';
+								billId_init += '</td></tr></table></section>';
+							} else if (val.action_dates.passed_lower !== null) {
+								billId_init += '<table class="bill_status_boxes"><tr><td>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="passed_text">PASSED HOUSE</div>';
+								billId_init += '</td></tr></table></section>';
+							}	
+							// This loop will run if bill originated in the upper chamber
+						} else if (val.chamber = "upper") {
+							if (val.action_dates.passed_upper === null) {
+								billId_init += '<table class="bill_status_boxes"><tr><td>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="passed_text">INTRODUCED TO SENATE</div>';
+								billId_init += '</td></tr></table></section>';
+							} else if (val.action_dates.signed !== null) {
+								billId_init += '<table class="bill_status_boxes"><tr><td>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="passed_text">SIGNED INTO LAW</div>';
+								billId_init += '</td></tr></table></section>';
+							} else if (val.action_dates.passed_lower !== null) {
+								billId_init += '<table class="bill_status_boxes"><tr><td>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="passed_text">PASSED HOUSE</div>';
+								billId_init += '</td></tr></table></section>';
+							} else if (val.action_dates.passed_upper !== null) {
+								billId_init += '<table class="bill_status_boxes"><tr><td>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="passed_text">PASSED SENATE</div>';
+								billId_init += '</td></tr></table></section>';
+							}
 						}
 					}
 					
-					// Crap to do to pull out date information
-					date_val_og =  val.action_dates.last.replace(' 00:00:00', '');
-					date_val = new Date(replaceAll(date_val_og, '-', '/'));
-					// For some reason the date is a date behind when we send it to Date();
-					// So we'll add one to the date
-					date_val.setDate(date_val.getDate()+1);
-					// Add to page
-					billId_init += '<aside><div class="last_updated">Latest Activity: ' + month[date_val.getMonth()] + ' ' + date_val.getDate() + ', ' + date_val.getFullYear() + '</div></aside>';
-					billId_init += '</div></div>';
-					billId_init += "<p><strong>Reporter's description:</strong> " + val.reporter_description + "</p>";
+					if (val.action_dates !== null) {
+						// Crap to do to pull out date information
+						date_val_og =  val.action_dates.last.replace(' 00:00:00', '');
+						date_val = new Date(replaceAll(date_val_og, '-', '/'));
+						// For some reason the date is a date behind when we send it to Date();
+						// So we'll add one to the date
+						date_val.setDate(date_val.getDate()+1);
+						// Add to page
+						billId_init += '<aside><div class="last_updated">Latest Activity: ' + month[date_val.getMonth()] + ' ' + date_val.getDate() + ', ' + date_val.getFullYear() + '</div></aside>';
+						billId_init += '</div></div>';
+					}
+					// Enter reporter's description
+					billId_init += "</div><p><strong>Reporter's description:</strong> " + val.reporter_description + "</p>";
 				}
 			}
 			bills_init += billId_init;
@@ -434,7 +439,7 @@ function loadJSON(selectedBill) {
 						actions03 = '<td>' + val[actions_num]['action'] + '</td>';
 						
 						// Add reporters notes for each action
-						if (val[actions_num]['text'] !== null) {
+						if (val[actions_num]['text'] !== null && val[actions_num]['text'] !== "" && val[actions_num]['text'] !== " ") {
 							actions03 += '<td><div class="action_info_button" name="description_' + count_actions + '">';
 							actions03 += '<a href="#"><img src="images/action_info.png" width="37px" /></a>';
 							actions03 += '</div></td>';
@@ -496,7 +501,8 @@ function loadJSON(selectedBill) {
 			// Title of the bill
 			if (key === 'title') {
 				description += '<h4 class="headers">Description</h4>';
-				description += '<div class="regular_text">' + val + '</div>';
+				description += '<div class="regular_text">' + val + '</div><br />';
+				description += "<div class='regular_text'><strong>Reporter's insight:</strong> " + data.reporter_description + '</div>';
 			}
 			
 			// Which chamber the bill originated in
