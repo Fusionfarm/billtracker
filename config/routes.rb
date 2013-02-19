@@ -1,4 +1,6 @@
 Billtracker::Application.routes.draw do
+  get "fetch/index"
+
   resources :annotations
 
 
