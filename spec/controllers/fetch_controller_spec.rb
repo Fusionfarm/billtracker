@@ -14,6 +14,13 @@ describe FetchController do
         response.should be_success
       end
     end
+
+    describe "POST create" do
+      it "redirects to index" do
+        post :create
+        response.should redirect_to(fetch_path)
+      end
+    end
   end
 
   context "user is logged out" do

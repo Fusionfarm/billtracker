@@ -1,5 +1,6 @@
 Billtracker::Application.routes.draw do
-  get "fetch/index"
+  get "fetch", :to => 'fetch#index'
+  post "fetch", :to => 'fetch#create', :as => 'new_fetch'
 
   resources :annotations
 
