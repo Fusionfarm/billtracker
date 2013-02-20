@@ -17,6 +17,7 @@ describe FetchController do
 
     describe "POST create" do
       it "redirects to index" do
+        BillFetcher.should_receive(:fetch_all).with(Bill.all)
         post :create
         response.should redirect_to(fetch_path)
       end

@@ -5,8 +5,9 @@ class FetchController < ApplicationController
   end
 
   def create
+    BillFetcher.fetch_all Bill.all
     respond_to do |format|
-      format.html { redirect_to fetch_path }
+      format.html { redirect_to fetch_path, notice: 'Bills were successfully updated.' }
     end
   end
 end
