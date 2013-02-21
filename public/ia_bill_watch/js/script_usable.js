@@ -267,11 +267,13 @@ function initialLoadJSON(topic) {
 	$('#contents_header_topic').html('');
 	$('#contents_header_topic').html('<a href="#">' + topic.toUpperCase() + '</a>')
 	
+	$('#bills_init').html('<p>TEST</p>');
+	
 	topics_headers = '';
 	topics_headers += '<h4 class="topics">' + topic_format + '</h4>';
 	topics_headers += '<hr class="headers_hr" />';
 	
-	// console.log(topic_format);
+	console.log(topic_format);
 	
 	// Our JSON call will parse data and place on the page
 	$.getJSON('http://billtracker.c3service.com/bills.js?callback=?', function(data){
@@ -291,56 +293,56 @@ function initialLoadJSON(topic) {
 					// We'll add graphic on page depending on the bills status
 					// This loop will run if bill originated in the lower chamber
 					if (val.chamber !== null) {
-						if (val.chamber === "lower") {
+						if (val.chamber = "lower") {
 							if (val.action_dates.passed_lower === null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_light_grey"></div>';
-								billId_init += '<div class="square_light_grey"></div><div class="square_light_grey"></div>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
 								billId_init += '<div class="passed_text">INTRODUCED TO HOUSE</div>';
 								billId_init += '</td></tr></table></section>';
 							} else if (val.action_dates.signed !== null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_dark_grey"></div>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_dark_grey"></div>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
 								billId_init += '<div class="passed_text">SIGNED INTO LAW</div>';
 								billId_init += '</td></tr></table></section>';
 							} else if (val.action_dates.passed_upper !== null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_dark_grey"></div>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_light_grey"></div>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
 								billId_init += '<div class="passed_text">PASSED SENATE</div>';
 								billId_init += '</td></tr></table></section>';
 							} else if (val.action_dates.passed_lower !== null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_dark_grey"></div>';
-								billId_init += '<div class="square_light_grey"></div><div class="square_light_grey"></div>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
 								billId_init += '<div class="passed_text">PASSED HOUSE</div>';
 								billId_init += '</td></tr></table></section>';
 							}	
 							// This loop will run if bill originated in the upper chamber
-						} else if (val.chamber === "upper") {
+						} else if (val.chamber = "upper") {
 							if (val.action_dates.passed_upper === null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_light_grey"></div>';
-								billId_init += '<div class="square_light_grey"></div><div class="square_light_grey"></div>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
+								billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
 								billId_init += '<div class="passed_text">INTRODUCED TO SENATE</div>';
 								billId_init += '</td></tr></table></section>';
 							} else if (val.action_dates.signed !== null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_dark_grey"></div>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_dark_grey"></div>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
 								billId_init += '<div class="passed_text">SIGNED INTO LAW</div>';
 								billId_init += '</td></tr></table></section>';
 							} else if (val.action_dates.passed_lower !== null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_dark_grey"></div>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_light_grey"></div>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_dark_grey" /><div class="square_light_grey" />';
 								billId_init += '<div class="passed_text">PASSED HOUSE</div>';
 								billId_init += '</td></tr></table></section>';
 							} else if (val.action_dates.passed_upper !== null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
-								billId_init += '<div class="square_dark_grey"></div><div class="square_dark_grey"></div>';
-								billId_init += '<div class="square_light_grey"></div><div class="square_light_grey"></div>';
+								billId_init += '<div class="square_dark_grey" /><div class="square_dark_grey" />';
+								billId_init += '<div class="square_light_grey" /><div class="square_light_grey" />';
 								billId_init += '<div class="passed_text">PASSED SENATE</div>';
 								billId_init += '</td></tr></table></section>';
 							}
@@ -359,12 +361,12 @@ function initialLoadJSON(topic) {
 						billId_init += '</div></div>';
 					}
 					// Enter reporter's description
-					billId_init += "<p><strong>Reporter's insight:</strong> " + val.reporter_description + "</p>";
+					billId_init += "</div><p><strong>Reporter's insight:</strong> " + val.reporter_description + "</p>";
 				}
 			}
 			bills_init += billId_init;
 			billId_init += '<br /><br /><br />'
-		});
+		});	
 	})
 	.error(
 		function() {
@@ -377,6 +379,9 @@ function initialLoadJSON(topic) {
 			// Add stuff to the page
 			$('.loading_content_init').hide();
 			$('#bills_init').html(topics_headers + bills_init);
+			console.log(topics_headers);
+			console.log(bills_init);
+			console.log($('#bills_init').html());
 		}
 	)
 };
@@ -450,11 +455,7 @@ function loadJSON(selectedBill) {
 						// Add reporters notes for each action
 						if (val[actions_num]['text'] !== null && val[actions_num]['text'] !== "" && val[actions_num]['text'] !== " ") {
 							actions03 += '<td><div class="action_info_button" name="description_' + count_actions + '">';
-							if ($.browser.msie) {
-								actions03 += '<a href="#"><img src="images/action_info_small.png" alt="Read more about this bill" /></a>';
-							} else {
-								actions03 += '<a href="#"><img src="images/action_info.png" width="37px" alt="Read more about this bill" /></a>';
-							}
+							actions03 += '<a href="#"><img src="images/action_info.png" width="37px" /></a>';
 							actions03 += '</div></td>';
 							actions03 += '</tr>';
 							actions03 += '<tr><td colspan="4">';
@@ -481,7 +482,7 @@ function loadJSON(selectedBill) {
 						actions01 = '<tr>';
 						// Holds date
 						date_val_og =  val[actions_num]['date'].replace(' 00:00:00', '');
-						date_val = new Date(replaceAll(date_val_og, '-', '/'));
+						date_val = new Date(date_val_og.replace('-', '/'));
 						// For some reason the date is a date behind when we send it to Date();
 						// So we'll add one to the date
 						date_val.setDate(date_val.getDate()+1);
@@ -667,20 +668,12 @@ function loadJSON(selectedBill) {
 				if (data.action_dates.signed === null) {
 					billId += '<div class="bill_number_header"><h5 id="bill_number">' + val + '</h5></div>';
 					billId += '<div class="bill_status_img">';
-					if ($.browser.msie) {
-						billId += '<img src="images/status_in_progress_small.jpg" alt="This bill is in progress" />';
-					} else {
-						billId += '<img width="128px" src="images/status_in_progress.jpg" alt="This bill is in progress" />';
-					}
+					billId += '<img src="images/status_in_progress.jpg" width="128px" height="28px" />';
 					billId += '</div>';
 				} else {
 					billId += '<div class="bill_number_header"><h5 id="bill_number">' + val + '</h5></div>';
 					billId += '<div class="bill_status_img">';
-					if ($.browser.msie) {
-						billId += '<img src="images/status_signed_small.jpg" alt="This bill has been signed" />';
-					} else {
-						billId += '<img width="130px" src="images/status_signed.jpg" alt="This bill has been signed" />';
-					}
+					billId += '<img src="images/status_signed.jpg" width="130px" height="26px" />';
 					billId += '</div>'
 				}
 			}
