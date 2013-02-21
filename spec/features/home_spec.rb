@@ -18,7 +18,7 @@ describe "Home" do
       it "has correct navigation" do
         # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
         visit root_path
-        page.should have_link("Bills", :href => bills_path)
+        page.should have_link("List", :href => bills_path)
         page.should have_link("Topics", :href => topics_path)
       end
     end
