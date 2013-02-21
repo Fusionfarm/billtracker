@@ -291,7 +291,7 @@ function initialLoadJSON(topic) {
 					// We'll add graphic on page depending on the bills status
 					// This loop will run if bill originated in the lower chamber
 					if (val.chamber !== null) {
-						if (val.chamber = "lower") {
+						if (val.chamber === "lower") {
 							if (val.action_dates.passed_lower === null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
 								billId_init += '<div class="square_dark_grey"></div><div class="square_light_grey"></div>';
@@ -318,7 +318,7 @@ function initialLoadJSON(topic) {
 								billId_init += '</td></tr></table></section>';
 							}	
 							// This loop will run if bill originated in the upper chamber
-						} else if (val.chamber = "upper") {
+						} else if (val.chamber === "upper") {
 							if (val.action_dates.passed_upper === null) {
 								billId_init += '<table class="bill_status_boxes"><tr><td>';
 								billId_init += '<div class="square_dark_grey"></div><div class="square_light_grey"></div>';
@@ -377,9 +377,6 @@ function initialLoadJSON(topic) {
 			// Add stuff to the page
 			$('.loading_content_init').hide();
 			$('#bills_init').html(topics_headers + bills_init);
-			console.log(topics_headers);
-			console.log(bills_init);
-			console.log($('#bills_init').html());
 		}
 	)
 };
@@ -484,7 +481,7 @@ function loadJSON(selectedBill) {
 						actions01 = '<tr>';
 						// Holds date
 						date_val_og =  val[actions_num]['date'].replace(' 00:00:00', '');
-						date_val = new Date(date_val_og.replace('-', '/'));
+						date_val = new Date(replaceAll(date_val_og, '-', '/'));
 						// For some reason the date is a date behind when we send it to Date();
 						// So we'll add one to the date
 						date_val.setDate(date_val.getDate()+1);
@@ -919,7 +916,6 @@ function loadToPage(DOM_manipulation_check) {
 		$('#view_less_votes_button').hide();
 		$('#votes_second').hide();
 		
-		console.log(billId);
 		// Clear out DIVs
 		$('#billId').html('');
 		$('#chamber').html('');
