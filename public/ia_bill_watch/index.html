@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Bill Tracker: 2013 Iowa Legislature</title>
 	
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
@@ -16,35 +16,42 @@
 </head>
 
 <body>
-	<div id="list_of_categories">
-		<h2 id='bill_tracker_header'>Bill Tracker</h2>
-		<div id='session_header'>The 2013 session of the Iowa Legislature</div>
+    <div id="list_of_categories">
+		<h2 id="bill_tracker_header">Bill Tracker</h2>
+		<div id="session_header">The 2013 session of the Iowa Legislature</div>
 		<br />
-		<div id ="app_description">- The staff at Iowa Sourcemedia and the Waterloo-Cedar Falls Courier have selected dozens of the most important pieces of legislation and will be tracking their progress through the Iowa Legislature this year.
-		<br />
-		- To use this app, first select a category to see a list of bills that fit into that topic. Then select a bill to view its progress, as well as insights from our Statehouse reporters on the bill.</div>
+		<div id ="app_description">- The political reporting teams of The Gazette and Lee Enterprise's Iowa newspapers have teamed up to follow the most important pieces of legislation and will be tracking the progress of the proposals as they wind through the Iowa Legislature this session. The team will annotate important developments and translate some of the legi-speak into easy-to-understand updates.
+        <br />
+		- Enter the app below by selecting a category to see a list of bills in that category. Click on the bill number to view additional details, follow its progress and noteworthy developments and see insights from the reporting teams.
+        <br />
+        - If you've got ideas of bills we should be following or want to suggest improvements for the app, please <strong><a href="mailto:chris.essig@wcfcourier.com;%20zack.kucharski@sourcemedia.net?subject=Iowa%20bill%20tracker">click here</a></strong>.
+        </div>
 		<hr />
 		<div id="choose_category">Choose a category</div>
-		
+        
 		<div class="icons">
+			<div class="circles" id="agriculture"></div>
+			<div class="circles" id="business"></div>
+			<div class="circles" id="criminal-law"></div>
 			<div class="circles" id="elections"></div>
 			<div class="circles" id="education"></div>
+			<div class="circles" id="environment"></div>
 			<div class="circles" id="gaming"></div>
 			<div class="circles" id="health"></div>
-			<div class="circles" id="legal"></div>
 			<div class="circles" id="taxes"></div>
+			<div class="circles" id="transportation"></div>
 		</div>
 	</div>
+    
 	
 	<div class="clear"></div>
 	
 	<div id="contents_header">
-		<div id="contents_header_categories">
+        <div id="contents_header_categories">
 			<a href="#">CATEGORIES</a>
 		</div>
 		<div class="dashes">/</div>
-		<div id="contents_header_topic">
-		</div>
+		<div id="contents_header_topic"></div>
 		<div class="dashes">/</div>
 		<div id="contents_header_bill_id"></div>
 	</div>
@@ -52,59 +59,60 @@
 	<div class="clear"></div>
 	
 	<div id="bill_content_init">
-		<div class='loading_content_init'><h4 class='headers'>Loading...</h3></div>	
-		<div id="bills_init"></div>
+		<div class="loading_content_init"><h3 class="headers">Loading...</h3></div>
+        <div id="bills_init"></div>
 	</div>
-	
-	<div id='bill_content'>
-		<div class='loading_content'><h4 class='headers'>Loading...</h3></div>
+    
+	<div id="bill_content">
+		<div class="loading_content"><h3 class="headers">Loading...</h3></div>
 			
-		<div id='billId'></div>
+		<div id="billId"></div>
 		<hr />
-		<div id='chamber'></div>
+		<div id="chamber"></div>
 		<hr />
-		<div id='description'></div>
+		<div id="description"></div>
 		<hr />
-		<div id='actions'></div>
-		<div id='actions_second'></div>
-		<div id='view_more_actions_button'>
+		<div id="actions"></div>
+		<div id="actions_second"></div>
+		<div id="view_more_actions_button">
 			<ul class="nav nav-tabs nav-stacked">
-	    		<li class='actions_buttons buttons'><a href="#">Load More Actions</a></li>
+	    		<li class="actions_buttons buttons"><a href="#">Load More Actions</a></li>
 			</ul>
 		</div>
-		<div id='view_less_actions_button'>
+		<div id="view_less_actions_button">
 			<ul class="nav nav-tabs nav-stacked">
-	    		<li class='actions_buttons buttons'><a href="#">Load Less Actions</a></li>
-			</ul>
-		</div>
-		<hr />
-		<div id='sources'></div>
-		<hr />
-		<div id='sponsors'></div>
-		<hr />
-		<div id='loading'><h4 class="headers">Votes</h4><p>Loading...</p></div>
-		<div id='votes'></div>
-		<div id='votes_second'></div>
-		<div id='view_more_votes_button'>
-			<ul class="nav nav-tabs nav-stacked">
-	    		<li class='votes_buttons buttons'><a href="#">Load More Votes</a></li>
-			</ul>
-		</div>
-		<div id='view_less_votes_button'>
-			<ul class="nav nav-tabs nav-stacked">
-	    		<li class='votes_buttons buttons'><a href="#">Load Less Votes</a></li>
+	    		<li class="actions_buttons buttons"><a href="#">Load Less Actions</a></li>
 			</ul>
 		</div>
 		<hr />
-		<div id='updated_at'></div>
+		<div id="sources"></div>
+		<hr />
+		<div id="sponsors"></div>
+		<hr />
+		<div id="loading"><h4 class="headers">Votes</h4><p>Loading...</p></div>
+		<div id="votes"></div>
+		<div id="votes_second"></div>
+		<div id="view_more_votes_button">
+			<ul class="nav nav-tabs nav-stacked">
+	    		<li class="votes_buttons buttons"><a href="#">Load More Votes</a></li>
+			</ul>
+		</div>
+		<div id="view_less_votes_button">
+			<ul class="nav nav-tabs nav-stacked">
+	    		<li class="votes_buttons buttons"><a href="#">Load Less Votes</a></li>
+			</ul>
+		</div>
+		<hr />
+		<div id="updated_at">
+        </div>
 	</div>
 	
 	<div class="clear"></div>
 	<script>
-		$('#contents_header').hide();
-		$('#bill_content_init').hide();
-		$('#bill_content').hide();
-		$('.icons').hide();
+		$("#contents_header").hide();
+		$("#bill_content_init").hide();
+		$("#bill_content").hide();
+		$(".icons").hide();
 	</script>
 </body>
 </html>
