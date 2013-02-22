@@ -1,5 +1,7 @@
 %h1 Listing bills
 
+= will_paginate @bills
+
 %table.table
   %tr
     %th Bill #
@@ -19,6 +21,8 @@
       %td= link_to 'Show', bill
       %td= link_to 'Edit', edit_bill_path(bill)
       %td= link_to 'Delete', bill, method: :delete, data: { confirm: 'Are you sure? There is no way to undo this action and all annotations will be lost.' }
+
+= will_paginate @bills
 
 %br
 
