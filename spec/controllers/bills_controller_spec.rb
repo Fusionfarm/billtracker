@@ -167,6 +167,43 @@ describe BillsController do
         get :index, {}, valid_session
         assigns(:bills).should eq([bill])
       end
+
+      context "viewing as html" do
+        it "paginates" do
+          (Bill.per_page+1).times { Bill.create! valid_attributes }
+          bills = Bill.all
+          get :index, {}, valid_session
+          assigns(:bills).should eq(bills[0..(Bill.per_page-1)])
+        end
+
+        it "should order by session desc, bill id asc" do
+          bills = [
+            FactoryGirl.create(:bill, ext_bill_id: 'HF 102', session: '2011-2012'),
+            FactoryGirl.create(:bill, ext_bill_id: 'HF 101', session: '2011-2012'),
+            FactoryGirl.create(:bill, ext_bill_id: 'HF 100', session: '2013-2014')
+          ]
+          get :index, {}, valid_session
+          assigns(:bills).should eq([ bills[2], bills[1], bills[0] ])          
+        end
+      end
+
+      context "viewing as js" do
+        it "does not paginate" do
+          (Bill.per_page+1).times { Bill.create! valid_attributes }
+          bills = Bill.all
+          get :index, {:format => :js}, valid_session
+          assigns(:bills).should eq(bills)
+        end
+      end
+
+      context "viewing as json" do
+        it "does not paginate" do
+          (Bill.per_page+1).times { Bill.create! valid_attributes }
+          bills = Bill.all
+          get :index, {:format => :json}, valid_session
+          assigns(:bills).should eq(bills)
+        end
+      end
     end
 
     describe "GET show" do

@@ -29,4 +29,11 @@ describe Bill do
     end
   end
 
+  describe "pagination" do
+    subject { Bill }
+
+    it { should respond_to(:per_page) }
+    its(:per_page) { should == 10 }
+  end
+
 end

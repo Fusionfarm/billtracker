@@ -10,6 +10,8 @@ class Bill < ActiveRecord::Base
 
   accepts_nested_attributes_for :annotations, :allow_destroy => true
 
+  self.per_page = 10
+
   def annotated
     self.bill_data = { 'actions' => [] } if bill_data.nil?
     bill_data['reporter_description'] = reporter_description
