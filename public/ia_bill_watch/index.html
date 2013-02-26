@@ -76,6 +76,16 @@
         <div id="bills_init"></div>
 	</div>
     
+	<div class="clear"></div>
+
+	<div id="go_back_second_page">
+		<br />
+		<br />
+		<a href="#" onclick="toggle_front_page_from_second_page();"><button class="btn">Go Back</button></a>
+	</div>
+	
+	<div class="clear"></div>
+	
 	<div id="bill_content">
 		<div class="loading_content"><h3 class="headers">Loading...</h3></div>
 			
@@ -122,10 +132,17 @@
 	
 	<div class="clear"></div>
 	
+	<div id="go_back_third_page">
+		<br />
+		<br />
+		<a href="#" onclick="toggle_second_page_from_third_page();"><button class="btn">Go Back</button></a>
+	</div>
 	
 	<script>
 		$("#credits").hide();
 		$("#contents_header").hide();
+		$("#go_back_second_page").hide();
+		$("#go_back_third_page").hide();
 		$("#bill_content_init").hide();
 		$("#bill_content").hide();
 		$(".icons").hide();

@@ -48,15 +48,15 @@ function toggle_credits(){
 	$('#app_description').hide();
 	$('#choose_category').hide();
 	$('.icons').hide();
-	$('#credits').show()
+	$('#credits').fadeIn(200);
 };
 
 // Hide credits with go back button
 function toggle_front_page(){
 	$('#credits').hide();
-	$('#app_description').show();
-	$('#choose_category').show();
-	$('.icons').show();
+	$('#app_description').fadeIn(200);
+	$('#choose_category').fadeIn(200);
+	$('.icons').fadeIn(200);
 }
 
 // Second page stuff
@@ -69,7 +69,9 @@ $('#contents_header_categories').live('click', function (e) {
 	$('#bill_content_init').hide();
 	$('#bill_content_init').html('');
 	$('#bill_content_init').html("<div class='loading_content_init'><h4 class='headers'>Loading...</h4></div><div id='bills_init'></div>");
+	$("#go_back_second_page").hide();
 	$('#bill_content').hide();
+	$("#go_back_third_page").hide();
 	
 	$('#contents_header_categories').html();
 	$('#contents_header_bill_id').html('');
@@ -88,6 +90,35 @@ $('#contents_header_categories').live('click', function (e) {
 	$('.icons').fadeIn(200);
 });
 
+// Same code as above
+// Just for Go Back button on page
+function toggle_front_page_from_second_page() {
+	$('#contents_header').hide();
+	// Hide, clear out DIV
+	$('#bill_content_init').hide();
+	$('#bill_content_init').html('');
+	$('#bill_content_init').html("<div class='loading_content_init'><h4 class='headers'>Loading...</h4></div><div id='bills_init'></div>");
+	$("#go_back_second_page").hide();
+	$('#bill_content').hide();
+	$("#go_back_third_page").hide();
+	
+	$('#contents_header_categories').html();
+	$('#contents_header_bill_id').html('');
+	
+	// Clear out all the IDs in bill_content DIV
+	$('#billId').html('');
+	$('#chamber').html('');
+	$('#description').html('');
+	$('#actions').html('');
+	$('#actions_second').html('');
+	$('#sources').html('');
+	$('#sponsors').html('');
+	$('#updated_at').html('');
+	
+	$('#list_of_categories').fadeIn(200);
+	$('.icons').fadeIn(200);
+};
+
 // Content header stuff
 $('#contents_header_topic').live('click', function (e) {
 	e.preventDefault();
@@ -98,7 +129,9 @@ $('#contents_header_topic').live('click', function (e) {
 	// Show right DIV
 	$('.loading_content_init').fadeIn(200);
 	$('#bill_content').hide();
+	$("#go_back_third_page").hide();
 	$('#bill_content_init').fadeIn(200);
+	$("#go_back_second_page").show();
 	$('.loading_content_init').hide();
 	
 	// Clear out all the IDs in bill_content DIV
@@ -110,7 +143,7 @@ $('#contents_header_topic').live('click', function (e) {
 	$('#sources').html('');
 	$('#sponsors').html('');
 	$('#updated_at').html('');
-})
+});
 
 // When a user clicks a bill number, extensive bill information will be displayed
 // Via second JSON call function
@@ -119,6 +152,7 @@ $('.billId_buttons').live('click', function (e) {
 	
 	e.preventDefault();
 	$('#bill_content_init').hide();
+	$("#go_back_second_page").hide();
 	// Bill ID to content header DIV
 	billId = $(e.target).parent().attr('id');
 	$('#contents_header_bill_id').html(billId);
@@ -175,6 +209,29 @@ $('#actions_second').hide();
 $('#view_more_votes_button').hide();
 $('#view_less_votes_button').hide();
 $('#votes_second').hide();
+
+function toggle_second_page_from_third_page() {
+	// Get rid of bill ID in content header div
+	$('#contents_header_bill_id').html('');
+	
+	// Show right DIV
+	$('.loading_content_init').fadeIn(200);
+	$('#bill_content').hide();
+	$("#go_back_third_page").hide();
+	$('#bill_content_init').fadeIn(200);
+	$("#go_back_second_page").show();
+	$('.loading_content_init').hide();
+	
+	// Clear out all the IDs in bill_content DIV
+	$('#billId').html('');
+	$('#chamber').html('');
+	$('#description').html('');
+	$('#actions').html('');
+	$('#actions_second').html('');
+	$('#sources').html('');
+	$('#sponsors').html('');
+	$('#updated_at').html('');
+};
 
 
 // Functions
@@ -272,7 +329,9 @@ function initialLoadJSON(topic) {
 	// Hide extensive bill information by default
 	$('#contents_header').fadeIn(200);
 	$('#bill_content_init').fadeIn(200);
+	$("#go_back_second_page").show();
 	$('#bill_content').hide();
+	$("#go_back_third_page").hide();
 	
 	topic = topic.replace('-', ' ');
 	var topic_format = topic.toProperCase() + "";
@@ -388,6 +447,7 @@ function initialLoadJSON(topic) {
 	.error(
 		function() {
 			$('#bill_content_init').html('');
+			$("#go_back_second_page").hide();
 			$('#bill_content_init').html('Sorry, there has been an error');
 		}
 	)
@@ -404,6 +464,7 @@ function initialLoadJSON(topic) {
 function loadJSON(selectedBill) {
 	// Show extensive bill information
 	$('#bill_content').fadeIn(200);
+	$("#go_back_third_page").show();
 	// First clear out our variables
 	billId = "";
 	description = "";
