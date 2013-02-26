@@ -431,7 +431,7 @@ function initialLoadJSON(topic) {
 						date_val = new Date(replaceAll(date_val_og, '-', '/'));
 						// For some reason the date is a date behind when we send it to Date();
 						// So we'll add one to the date
-						date_val.setDate(date_val.getDate()+1);
+						date_val.setDate(date_val.getDate());
 						// Add to page
 						billId_init += '<aside><div class="last_updated">Latest Activity: ' + month[date_val.getMonth()] + ' ' + date_val.getDate() + ', ' + date_val.getFullYear() + '</div></aside>';
 						billId_init += '</div></div>';
@@ -520,7 +520,7 @@ function loadJSON(selectedBill) {
 						date_val = new Date(replaceAll(date_val_og, '-', '/'));
 						// For some reason the date is a date behind when we send it to Date();
 						// So we'll add one to the date
-						date_val.setDate(date_val.getDate()+1);
+						date_val.setDate(date_val.getDate());
 						actions02 = '<td width="20%"><strong>';
 						actions02 += month[date_val.getMonth()] + ' ' + date_val.getDate() + ', ' + date_val.getFullYear();
 						actions02 += ':</strong></td>';
@@ -564,7 +564,7 @@ function loadJSON(selectedBill) {
 						date_val = new Date(replaceAll(date_val_og, '-', '/'));
 						// For some reason the date is a date behind when we send it to Date();
 						// So we'll add one to the date
-						date_val.setDate(date_val.getDate()+1);
+						date_val.setDate(date_val.getDate());
 						actions02 = '<td width="20%"><strong>';
 						actions02 += month[date_val.getMonth()] + ' ' + date_val.getDate() + ', ' + date_val.getFullYear();
 						actions02 += ':</strong></td>';
@@ -783,7 +783,7 @@ function loadJSON(selectedBill) {
 					// First convert JSON date info to Javascript date
 					vote_date_val_og =  val[votes_num]['date'].replace(' 00:00:00', '');
 					vote_date_val = new Date(replaceAll(vote_date_val_og, '-', '/'));
-					vote_date_val.setDate(vote_date_val.getDate()+1);
+					vote_date_val.setDate(vote_date_val.getDate());
 					
 					current_vote_count = '';
 					current_vote_count += '<div>';
