@@ -25,7 +25,20 @@
 		- Enter the app below by selecting a category to see a list of bills in that category. Click on the bill number to view additional details, follow its progress and noteworthy developments and see insights from the reporting teams.
         <br />
         - If you've got ideas of bills we should be following or want to suggest improvements for the app, please <strong><a href="mailto:chris.essig@wcfcourier.com;%20zack.kucharski@sourcemedia.net?subject=Iowa%20bill%20tracker">click here</a></strong>.
+		<br />
+			- For a full list of credits, <strong><a href="#" onclick="toggle_credits();">click here</a></strong>.
         </div>
+		
+		<div id="credits">
+			<p><strong>News app built by:</strong> Aaron Frerichs, Justin Houtz, Chris Essig</p>
+			<p><strong>Reporters helping with project include:</strong> Zack Kucharski, Mike Wiser, Rod Boshart and James Lynch.</p>
+			<p><strong>Data provided by:</strong> <a href="http://openstates.org/" target="_blank">Open States</a>, which pulls information from the Iowa General Assembly <a href="https://www.legis.iowa.gov/index.aspx" target="_blank">website</a>.</p>
+			<p><strong>Icons provided by:</strong> the Noun Project. <a href="http://thenounproject.com/noun/agriculture/#icon-No4221" target="_blank">Agriculture icon</a> designed by <a href="http://thenounproject.com/ochaavmu" target="_blank">United Nations OCHA</a>. <a href="http://thenounproject.com/noun/briefcase/#icon-No6048" target="_blank">Business icon</a> designed by <a href="http://thenounproject.com/dmitry.kudinov.35" target="_blank">Dmitry Kudinov</a>. <a href="http://thenounproject.com/noun/prison/#icon-No5293" target="_blank">Criminal law icon</a> designed by <a href="http://thenounproject.com/Luis" target="_blank">Luis Prado</a>. <a href="http://thenounproject.com/noun/ballot-box/#icon-No7463" target="_blank">Election icon</a> designed by <a href="http://thenounproject.com/nicografico/" target="_blank">Nicolas Ramallo</a>. <a href="http://thenounproject.com/noun/education/#icon-No3012" target="_blank">Education icon</a> designed by <a href="http://thenounproject.com/chrismatthews82/" target="_blank">Chris Matthews</a>. <a href="http://thenounproject.com/noun/environment/#icon-No4223" target="_blank">Environment icon</a> designed by <a href="http://thenounproject.com/ochaavmu" target="_blank">United Nations OCHA</a>. <a href="http://thenounproject.com/noun/playing-cards/#icon-No7308" target="_blank">Gaming icon</a> designed by <a href="http://thenounproject.com/marcelabbade" target="_blank">Marcela Abbade</a>. <a href="http://thenounproject.com/noun/health/#icon-No4215" target="_blank">Health icon</a> designed by <a href="http://thenounproject.com/ochaavmu" target="_blank">United Nations OCHA</a>. <a href="http://thenounproject.com/noun/gavel/#icon-No6901" target="_blank">Legal icon</a> designed by <a href="http://thenounproject.com/karthicknagarajanps" target="_blank">Karthick Nagarajan</a>. <a href="http://thenounproject.com/noun/accounting/#icon-No4624" target="_blank">Taxes icon</a> designed by <a href="http://thenounproject.com/iconify/" target="_blank">Scott Lewis</a>. <a href="http://thenounproject.com/noun/car/#icon-No3612" target="_blank">Transportation icon</a> designed by <a href="http://thenounproject.com/Simon%20Child" target="_blank">Simon Child</a>.</p>
+			<br />
+			<br />
+			<a href="#" onclick="toggle_front_page();"><button class="btn">Go Back</button></a>
+		</div>
+		
 		<hr />
 		<div id="choose_category">Choose a category</div>
         
@@ -111,6 +124,7 @@
 	
 	
 	<script>
+		$("#credits").hide();
 		$("#contents_header").hide();
 		$("#bill_content_init").hide();
 		$("#bill_content").hide();
