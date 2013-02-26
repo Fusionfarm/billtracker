@@ -41,6 +41,9 @@ month[11]="Dec.";
 // API key
 var apiKey = '9ae0c27da2ce431baa7a85d2d89d51d8';
 
+
+// Second page stuff
+// The word 'categories' on the page that takes you to first page of the app
 $('#contents_header_categories').live('click', function (e) {
 	e.preventDefault();
 	
@@ -92,7 +95,6 @@ $('#contents_header_topic').live('click', function (e) {
 	$('#updated_at').html('');
 })
 
-// Second page stuff
 // When a user clicks a bill number, extensive bill information will be displayed
 // Via second JSON call function
 $('.billId_buttons').live('click', function (e) {
