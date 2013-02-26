@@ -42,6 +42,23 @@ month[11]="Dec.";
 var apiKey = '9ae0c27da2ce431baa7a85d2d89d51d8';
 
 
+// First page stuff
+// Show credits on click
+function toggle_credits(){
+	$('#app_description').hide();
+	$('#choose_category').hide();
+	$('.icons').hide();
+	$('#credits').show()
+};
+
+// Hide credits with go back button
+function toggle_front_page(){
+	$('#credits').hide();
+	$('#app_description').show();
+	$('#choose_category').show();
+	$('.icons').show();
+}
+
 // Second page stuff
 // The word 'categories' on the page that takes you to first page of the app
 $('#contents_header_categories').live('click', function (e) {
