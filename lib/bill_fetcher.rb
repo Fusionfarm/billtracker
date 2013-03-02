@@ -11,6 +11,7 @@ class BillFetcher
     # make sure we have valid data structures
     bill.bill_data = {} if bill.bill_data.nil?
     bill.bill_data['actions'] = [] unless bill.bill_data['actions'].is_a? Array
+    bill.bill_data['action_dates'] = {} if bill.bill_data['action_dates'].nil?
 
     # find or create annotations for each action
     bill.bill_data['actions'].each do |action|
@@ -18,6 +19,7 @@ class BillFetcher
       bill.annotations.create(date: action['date'], action: action['action']) if ann.nil?
     end
 
+    bill.last_action_date = bill.bill_data['action_dates']['last']
     bill.save
   end
 

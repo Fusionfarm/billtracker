@@ -14,6 +14,7 @@ describe Bill do
   it { should respond_to(:bill_data) }
   it { should respond_to(:topics) }
   it { should respond_to(:list_attributes) }
+  it { should respond_to(:last_action_date) }
 
   describe "validations" do
     it "requires an ext_bill_id" do
