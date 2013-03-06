@@ -57,9 +57,13 @@ function replaceAll(txt, replace, with_this) {
 // Everything was be run on hash changes
 $(window).hashchange( function(){
 	var hash = window.location.hash;
+	hash02 = hash.replace(/^#/, '');
+	hash_not_proper = hash02.replace('-', ' ');
+	hash_proper = hash_not_proper.toProperCase();
+	hash_uppercase = hash_not_proper.toUpperCase()
 
 	// Set the page title based on the hash.
-	document.title = 'Iowa Bill Tracker: ' + ( hash.replace( /^#/, '' ) || '2013 Legislature' );
+	document.title = 'Iowa Bill Tracker: ' + ( hash_not_proper || '2013 Legislature' );
 
 	// Iterate over all links
     $('.bill_float_wrap a').each(function(){
@@ -70,24 +74,30 @@ $(window).hashchange( function(){
 	// The word 'categories' on the page that takes you to first page of the app
 	// And the initial page load
 	if (hash === "" || hash === "#") {
+		// Hide out second, third page stuff
+		$('#contents_header').hide();
+		$('#bill_content_init').hide();
+		$("#go_back_second_page").hide();
+		$('#bill_content').hide();
+		$("#go_back_third_page").hide();
+
 		// Check to see if the icons have been loaded
 		// If not, load them
 		if ($('#agriculture').html() === '') {
 			loadCategories();
 		}
-		$('#contents_header').hide();
 		
-		// Hide, clear out DIV
-		$('#bill_content_init').hide();
+		// Fade in first page stuff
+		$('#list_of_categories').fadeIn(200);
+		$('#list_of_categories2').fadeIn(200);
+		$('.icons').fadeIn(200);
+
+		// Clear out DIVs
 		$('#bill_content_init').html('');
 		$('#bill_content_init').html("<div class='loading_content_init'><h4 class='headers'>Loading...</h4></div><div id='bills_init'></div>");
-		$("#go_back_second_page").hide();
-		$('#bill_content').hide();
-		$("#go_back_third_page").hide();
-		
 		$('#contents_header_categories').html();
 		$('#contents_header_bill_id').html('');
-	
+		
 		// Clear out all the IDs in bill_content DIV
 		$('#billId').html('');
 		$('#chamber').html('');
@@ -97,27 +107,29 @@ $(window).hashchange( function(){
 		$('#sources').html('');
 		$('#sponsors').html('');
 		$('#updated_at').html('');
-	
-		$('#list_of_categories').fadeIn(200);
-		$('#list_of_categories2').fadeIn(200);
-		$('.icons').fadeIn(200);
 	// Second page stuff
 	// Check to make sure this isn't a bill and is instead a categories page
 	// Then load up the bills under that category
 	} else if (hash.slice(0,3) !== "#SF" && hash.slice(0,3) !== "#HF") {
+		// Hide first, third page stuff
 		$('#list_of_categories').hide();
 		$('#list_of_categories2').hide();
-		
-		// Get rid of bill ID in content header div
-		$('#contents_header_bill_id').html('');
-
-		// Show right DIV
-		$('.loading_content_init').fadeIn(200);
 		$('#bill_content').hide();
 		$("#go_back_third_page").hide();
+		
+		// Clear out, refresh contents header topic DIV
+		// Get rid of bill ID in content header div
+		$('#contents_header_bill_id').html('');
+		// Load correct topic with hash
+		$('#contents_header_topic').html('');
+		$('#contents_header_topic').html('<a href="#' + hash_proper + '">' + hash_uppercase + '</a>')
+		$('#contents_header').fadeIn(200);
+		
+		// Show right DIV
 		$('#bill_content_init').fadeIn(200);
+		//$('.loading_content_init').show();
 		$("#go_back_second_page").show();
-	
+
 		// Clear out all the IDs in bill_content DIV
 		$('#billId').html('');
 		$('#chamber').html('');
@@ -129,34 +141,50 @@ $(window).hashchange( function(){
 		$('#updated_at').html('');
 
 		// Fire it up
-		initialLoadJSON(window.location.hash);
+		initialLoadJSON(hash_not_proper);
 	// Third page stuff
 	// When a user clicks a bill number, extensive bill information will be displayed
 	// Via second JSON call function
 	} else if (hash.slice(0,3) === "#SF" || hash.slice(0,3) === "#HF") {
+		// Info on action more, less buttons
+		$('#view_more_actions_button').hide();
+		$('#view_less_actions_button').hide();
+		$('#actions_second').hide();
+
+		// Info on votes more, less buttons
+		$('#view_more_votes_button').hide();
+		$('#view_less_votes_button').hide();
+		$('#votes_second').hide();
+
+		$('#loading').hide();
+		// Hide first, second page stuff
 		$('#list_of_categories').hide();
 		$('#list_of_categories2').hide();
-
-		$('.loading_content').fadeIn(200);
-
 		$('#bill_content_init').hide();
 		$("#go_back_second_page").hide();
+
 		// Bill ID to content header DIV
-		billId = window.location.hash.replace('#', '');
-		$('#contents_header_bill_id').html(billId);
-		
+		$('#contents_header_bill_id').html(hash_not_proper);
+		$('#contents_header').fadeIn(200);
+
+		// Show extensive bill information
+		// Do this before JSON call below
+		$('#bill_content').fadeIn(200);
+		$('.loading_content').show();
+
 		// Load bill path info from JSON file
 		$.getJSON('http://billtracker.c3service.com/bills.js?callback=?', function(data){
 			$.each(data, function(key, val) {
-				if (billId === val.bill_id) {
+				if (hash_not_proper === val.bill_id) {
 					// Check to see if we have a category listing on the page already
 					// If not, we'll grab one with this JSON call
 					if ($('#contents_header_topic a').attr('href') === undefined) {
 						topic = val.topics[0];
 						// Clear out, refresh DIV
 						$('#contents_header_topic').html('');
-						$('#contents_header_topic').html('<a href="#' + topic.toProperCase() + '">' + topic.toUpperCase() + '</a>')
+						$('#contents_header_topic').html('<a href="#' + topic.toProperCase() + '">' + topic.toUpperCase() + '</a>');
 					}
+					// Send this info to our loadJSON function
 					billPath = val.bill_path;
 					loadJSON(billPath);
 				}
@@ -189,39 +217,6 @@ function toggle_front_page(){
 	$('#choose_category').fadeIn(200);
 	$('.icons').fadeIn(200);
 }
-
-
-// Same code as above
-// Just for Go Back button on page
-function toggle_front_page_from_second_page() {
-	$('#contents_header').hide();
-	// Hide, clear out DIV
-	$('#bill_content_init').hide();
-	$('#bill_content_init').html('');
-	$('#bill_content_init').html("<div class='loading_content_init'><h4 class='headers'>Loading...</h4></div><div id='bills_init'></div>");
-	$("#go_back_second_page").hide();
-	$('#bill_content').hide();
-	$("#go_back_third_page").hide();
-	
-	$('#contents_header_categories').html();
-	$('#contents_header_bill_id').html('');
-	
-	// Clear out all the IDs in bill_content DIV
-	$('#billId').html('');
-	$('#chamber').html('');
-	$('#description').html('');
-	$('#actions').html('');
-	$('#actions_second').html('');
-	$('#sources').html('');
-	$('#sponsors').html('');
-	$('#updated_at').html('');
-	
-	$('#list_of_categories').fadeIn(200);
-	$('#list_of_categories2').fadeIn(200);
-	$('.icons').fadeIn(200);
-};
-
-
 
 // Third page stuff
 // Toggle full list of actions when button is clicked
@@ -260,39 +255,6 @@ $('.action_info_button').live('click', function (e) {
 	action_info_button_name = $(e.target).parent().parent().attr('name');
 	$('#' + action_info_button_name).toggle();
 })
-
-// Info on action more, less buttons
-$('#view_more_actions_button').hide();
-$('#view_less_actions_button').hide();
-$('#actions_second').hide();
-
-// Info on votes more, less buttons
-$('#view_more_votes_button').hide();
-$('#view_less_votes_button').hide();
-$('#votes_second').hide();
-
-// 'Go back' button
-function toggle_second_page_from_third_page() {
-	// Get rid of bill ID in content header div
-	$('#contents_header_bill_id').html('');
-	
-	// Show right DIV
-	$('#bill_content').hide();
-	$("#go_back_third_page").hide();
-	$('#bill_content_init').fadeIn(200);
-	$("#go_back_second_page").show();
-	$('.loading_content_init').hide();
-	
-	// Clear out all the IDs in bill_content DIV
-	$('#billId').html('');
-	$('#chamber').html('');
-	$('#description').html('');
-	$('#actions').html('');
-	$('#actions_second').html('');
-	$('#sources').html('');
-	$('#sponsors').html('');
-	$('#updated_at').html('');
-};
 
 
 // Load up icons, circles for categories
@@ -371,26 +333,12 @@ function loadCategories() {
 
 // Initial function that starts all this madness
 function initialLoadJSON(topic) {
-	// Hide extensive bill information by default
-	$('#contents_header').fadeIn(200);
-	$('#bill_content_init').fadeIn(200);
-	$("#go_back_second_page").show();
-	$('#bill_content').hide();
-	$("#go_back_third_page").hide();
-	
-	topic01 = window.location.hash;
-	topic02 = topic01.replace('-', ' ');
-	topic = topic02.replace('#', '');
 	var topic_format = topic.toProperCase() + "";
 	// First clear out our variables
 	topics_array = [];
 	topics_headers = "";
 	billId_init = "";
 	bills_init = "";
-	
-	// Clear out, refresh DIV
-	$('#contents_header_topic').html('');
-	$('#contents_header_topic').html('<a href="#' + topic.toProperCase() + '">' + topic.toUpperCase() + '</a>')
 	
 	topics_headers = '';
 	topics_headers += '<h4 class="topics">' + topic_format + '</h4>';
@@ -508,21 +456,7 @@ function initialLoadJSON(topic) {
 };
 
 // Second JSON call to the Open States API
-function loadJSON(billPath, topic_hash) {
-	selectedBill_og = window.location.hash;
-	selectedBill = selectedBill_og.replace('#', '')
-
-
-	// Hide extensive bill information by default
-	// Clear out, refresh DIV
-	// $('#contents_header_topic').html('');
-	// $('#contents_header_topic').html('<a href="#' + topic.toProperCase() + '">' + topic.toUpperCase() + '</a>')
-
-	$('#contents_header').fadeIn(200);
-
-	// Show extensive bill information
-	$('#bill_content').fadeIn(200);
-	
+function loadJSON(billPath) {
 	// Set the'Go back' button so it goes to the bill's category page
 	topic_hash = $('#contents_header_topic a').attr('href');
 	$('#go_back_third_page a').attr('href', topic_hash);
