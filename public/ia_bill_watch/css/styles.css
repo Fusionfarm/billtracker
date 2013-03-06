@@ -62,6 +62,10 @@ aside {
 	width: 30.30303030%; /* 200px ÷ 660px = .30303030 */
 }
 
+.social_links {
+	display: none;
+}
+
 @media all and (max-width: 360px) {
 	section, aside {
 		float: left;
@@ -70,6 +74,12 @@ aside {
 	.bill_number_header, .bill_status_img {
 		text-align: center;
 		width: 100%;
+	}
+}
+
+@media (max-width: 600px) {
+	.social_links {
+		display: inherit;
 	}
 }
 
