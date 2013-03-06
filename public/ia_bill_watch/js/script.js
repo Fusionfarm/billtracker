@@ -69,7 +69,7 @@ $(window).hashchange( function(){
     // First page stuff
 	// The word 'categories' on the page that takes you to first page of the app
 	// And the initial page load
-	if (hash === "") {
+	if (hash === "" || hash === "#") {
 		// Check to see if the icons have been loaded
 		// If not, load them
 		if ($('#agriculture').html() === '') {
