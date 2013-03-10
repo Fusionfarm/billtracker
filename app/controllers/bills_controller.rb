@@ -4,7 +4,8 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    @bills = Bill.all
+    @bills = Bill.all(order: 'session desc, ext_bill_id') if ['json','js'].include?(params[:format])
+    @bills = Bill.paginate(order: 'session desc, ext_bill_id', page: params[:page]) unless ['json','js'].include?(params[:format])
     @bills_simple = @bills.map do |bill|
       bill.list_attributes
     end

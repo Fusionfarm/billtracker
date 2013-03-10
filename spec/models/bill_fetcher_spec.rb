@@ -9,7 +9,7 @@ describe BillFetcher do
       to_return(:status => 200, :body => '{"some":"data"}', :headers => {})
 
     BillFetcher.fetch @bill
-    @bill.bill_data.should eq({"some" => "data", "actions" => []})
+    @bill.bill_data.should eq({"some" => "data", "actions" => [], "action_dates" => {} })
   end
 
   it "should create annotations" do

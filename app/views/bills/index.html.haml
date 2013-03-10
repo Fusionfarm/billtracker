@@ -1,11 +1,14 @@
 %h1 Listing bills
 
+= will_paginate @bills
+
 %table.table
   %tr
     %th Bill #
     %th State
     %th Session
     %th Reporter description
+    %th Last Action
     %th
     %th
     %th
@@ -16,9 +19,12 @@
       %td= bill.state
       %td= bill.session
       %td= bill.reporter_description
+      %td= bill.last_action_date.blank? ? "unknown" : bill.last_action_date.to_s(:long_date_only)
       %td= link_to 'Show', bill
       %td= link_to 'Edit', edit_bill_path(bill)
       %td= link_to 'Delete', bill, method: :delete, data: { confirm: 'Are you sure? There is no way to undo this action and all annotations will be lost.' }
+
+= will_paginate @bills
 
 %br
 

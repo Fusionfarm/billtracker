@@ -45,6 +45,16 @@ describe TopicsController do
         get :index, {}, valid_session
         assigns(:topics).should eq([topic])
       end
+
+      it "should order by name" do
+        topics = [
+          FactoryGirl.create(:topic, name: 'A'),
+          FactoryGirl.create(:topic, name: 'C'),
+          FactoryGirl.create(:topic, name: 'B')
+        ]
+        get :index, {}, valid_session
+        assigns(:topics).should eq([topics[0],topics[2],topics[1]])
+      end
     end
 
     describe "GET new" do

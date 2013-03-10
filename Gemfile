@@ -34,3 +34,4 @@ gem "httparty"
 gem "multi_json", "~> 1.0"
 gem "json_spec", :group => :test
 gem "therubyracer", :require => 'v8'
+gem "will_paginate", "~> 3.0.4"
