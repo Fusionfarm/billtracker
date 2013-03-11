@@ -1,0 +1,9 @@
+<script type="text/javascript">
+  function scrollToTop(event) {
+    if (event.data == "scroll_message") {
+      window.top.scrollTo(0,0);
+    }
+  }
+  window.addEventListener("message", scrollToTop, false);
+</script>
+<iframe src="http://fusionfarm.local:3000/ia_bill_watch/index.html" width="620" height="1500"></iframe>
