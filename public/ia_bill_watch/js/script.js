@@ -74,7 +74,7 @@ $(window).hashchange( function(){
 	// The word 'categories' on the page that takes you to first page of the app
 	// And the initial page load
 	if (hash === "" || hash === "#") {
-		window.top.scrollTo(0,0);
+		parent.postMessage("scroll_message","*");
 		// Hide out second, third page stuff
 		$('#contents_header').hide();
 		$('#bill_content_init').hide();
@@ -112,7 +112,7 @@ $(window).hashchange( function(){
 	// Check to make sure this isn't a bill and is instead a categories page
 	// Then load up the bills under that category
 	} else if (hash.slice(0,3) !== "#SF" && hash.slice(0,3) !== "#HF") {
-		window.top.scrollTo(0,0);
+		parent.postMessage("scroll_message","*");
 		// Hide first, third page stuff
 		$('#list_of_categories').hide();
 		$('#list_of_categories2').hide();
@@ -148,7 +148,7 @@ $(window).hashchange( function(){
 	// When a user clicks a bill number, extensive bill information will be displayed
 	// Via second JSON call function
 	} else if (hash.slice(0,3) === "#SF" || hash.slice(0,3) === "#HF") {
-		window.top.scrollTo(0,0);
+		parent.postMessage("scroll_message","*");
 		// Info on action more, less buttons
 		$('#view_more_actions_button').hide();
 		$('#view_less_actions_button').hide();
