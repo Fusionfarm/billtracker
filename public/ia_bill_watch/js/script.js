@@ -73,6 +73,7 @@ $(window).hashchange( function(){
     // First page stuff
 	// The word 'categories' on the page that takes you to first page of the app
 	// And the initial page load
+	// console.log(hash);
 	if (hash === "" || hash === "#") {
 		parent.postMessage("scroll_message","*");
 		// Hide out second, third page stuff
@@ -85,6 +86,9 @@ $(window).hashchange( function(){
 		// Check to see if the icons have been loaded
 		// If not, load them
 		if ($('#agriculture').html() === '') {
+			// We'll hide the 'Select a bill' header 
+			// BC we're loading it after the circles are placed on page
+			$('#select_a_bill').hide();
 			loadCategories();
 		}
 		
@@ -111,7 +115,7 @@ $(window).hashchange( function(){
 	// Second page stuff
 	// Check to make sure this isn't a bill and is instead a categories page
 	// Then load up the bills under that category
-	} else if (hash.slice(0,3) !== "#SF" && hash.slice(0,3) !== "#HF") {
+	} else if (hash.slice(0,3) !== "#SF" && hash.slice(0,3) !== "#HF" && hash.slice(0,4) !== "#HSB") {
 		parent.postMessage("scroll_message","*");
 		// Hide first, third page stuff
 		$('#list_of_categories').hide();
@@ -147,7 +151,7 @@ $(window).hashchange( function(){
 	// Third page stuff
 	// When a user clicks a bill number, extensive bill information will be displayed
 	// Via second JSON call function
-	} else if (hash.slice(0,3) === "#SF" || hash.slice(0,3) === "#HF") {
+	} else if (hash.slice(0,3) === "#SF" || hash.slice(0,3) === "#HF" || hash.slice(0,4) === "#HSB") {
 		parent.postMessage("scroll_message","*");
 		// Info on action more, less buttons
 		$('#view_more_actions_button').hide();
@@ -208,6 +212,8 @@ $(document).ready(function() {
 // Show credits on click
 function toggle_credits(){
 	$('#app_description').hide();
+	$('.headers_first_page').hide();
+	$('#select_a_bill').hide();
 	$('#choose_category').hide();
 	$('.icons').hide();
 	$('#credits').fadeIn(200);
@@ -216,6 +222,8 @@ function toggle_credits(){
 // Hide credits with go back button
 function toggle_front_page(){
 	$('#credits').hide();
+	$('.headers_first_page').fadeIn(200);
+	$('#select_a_bill').fadeIn(200);
 	$('#app_description').fadeIn(200);
 	$('#choose_category').fadeIn(200);
 	$('.icons').fadeIn(200);
@@ -274,7 +282,18 @@ function loadCategories() {
 	// Then fade in each icon with a delay
 	// We'll add circles with Raphael too
 	count = 0;
+	loadCircles();
+}
+
+function loadCircles() {
+	// Store the number of circles on the page
+	circleCount = $('.circles').length;
+	// And our count variable
+	count = 0;
+
 	$('.circles').each($).wait(200, function(){
+		// Add 1 to count variable every time each function is called
+		count = count + 1;
 		// xpos - 26, ypos - 25
 		circle_id = $(this).attr('id');
 		var img_src = 'icons/' + circle_id + '.png';
@@ -331,9 +350,48 @@ function loadCategories() {
 			}
 			window.location.hash = topic.toProperCase();
 		});
+		// If we have gone through all the circles,
+		// We'll called our loadLostOfBills function and display bill numbers
+		if (count === circleCount){
+			loadListOfBills();
+		};
 	});
 }
+function loadListOfBills(){
+	$('#select_a_bill').show();
+	// Create the 'select a bill' table
+	select_bill_table = "";
+	select_bill_table += '<div class="headers_first_page">Or select a bill</div>';
+	select_bill_table += '<br /><table width="100%" id="select_bill_table">';
 
+	$.getJSON('http://billtracker.c3service.com/bills.js?callback=?', function(data){
+		// This will look at the JSON file and see what bills have the topics selected
+		// It will then display those bills, as well as their status
+		$.each(data, function(key, val) {
+				// console.log(key); 
+				// Break the table into fours
+					if (key % 4 === 0) {
+						select_bill_table += '<tr>';
+					}
+					select_bill_table += '<td>';
+					select_bill_table += '<a href="#' + val.bill_id + '">';
+					select_bill_table += '<strong>' + val.bill_id + '</strong></a>';
+					select_bill_table += '</td>';
+					if (key % 4 === 3) {
+						select_bill_table += '</tr>';
+					}
+		});
+		// Close out the table
+		select_bill_table += '</table>';
+		// Add Return to top button
+		select_bill_table += '<br /><br />';
+		select_bill_table += '<div class="visible_five_fifty">';
+		select_bill_table += '<a class="btn btn-info" href="#">Return to the Top</a>';
+		select_bill_table += '</div>';
+		// Add to DOM
+		$('#select_a_bill').html(select_bill_table);
+	});
+}
 // Initial function that starts all this madness
 function initialLoadJSON(topic) {
 	var topic_format = topic.toProperCase() + "";
@@ -484,12 +542,13 @@ function loadJSON(billPath) {
 	updated_at = "";
 	
 	// First JSON call grabs bill info from Open States site
-	$.getJSON('http://billtracker.c3service.com/' + billPath + '/annotated.js?callback=?', function(data){
+	$.getJSON('http://billtracker.c3service.com' + billPath + '/annotated.js?callback=?', function(data){
 		$('#loading').hide();
 		// Run through the JSON file we called
 		// And pull out bill information we want
 		$.each(data, function(key, val) {
 			// List of floor actions
+			// console.log(key, val);
 			if (key === 'actions') {
 				// Title table
 				actions += '<table cellpadding="5px" width="50%"><tr>';
@@ -551,6 +610,8 @@ function loadJSON(billPath) {
 							actions04 = '<td><div class="house_box">H</div></td>';
 						} else if (val[actions_num]['actor'] === 'upper') {
 							actions04 = '<td><div class="senate_box">S</div></td>';
+						} else {
+							actions04 = '<td></td>';
 						}
 						// Put the body together
 						actionsBody += actions01 + actions04 + actions02 + actions03;

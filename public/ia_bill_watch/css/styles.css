@@ -8,6 +8,15 @@ body {
 	padding-right: 10px;
 }
 
+div.clear {
+    clear:both;
+}
+
+image {
+	cursor: pointer;
+	preserveAspectRatio: none;
+}
+
 #bill_tracker_header {
 	font-size: 32px;
 	font-weight: bold;
@@ -18,14 +27,9 @@ body {
 	font-weight: bold;
 }
 
-#choose_category {
+.headers_first_page {
 	font-size: 20px;
 	font-weight: bold;
-}
-
-image {
-	cursor: pointer;
-	preserveAspectRatio: none;
 }
 
 .icons {
@@ -40,6 +44,19 @@ image {
 	padding-right: 10px;
 	text-align: center;
 	font-size: 12px;
+}
+
+#select_bill_table {
+	margin-left: 19px;
+	font-size: 18px;
+}
+
+#select_bill_table td {
+	padding-bottom: 5px;
+}
+
+.visible_five_fifty {
+	display: none;
 }
 
 #contents_header {
@@ -71,15 +88,40 @@ aside {
 		float: left;
 		width: auto;
 	}
+
 	.bill_number_header, .bill_status_img {
 		text-align: center;
 		width: 100%;
 	}
 }
 
+@media all and (max-width: 400px) {
+	#share table td {
+		padding-top: 10px;
+	}
+
+}
+
 @media (max-width: 550px) {
 	.social_links {
 		display: inherit;
+	}
+
+	#select_bill_table {
+		font-size: 22px;
+		display: block;
+	}
+	#select_bill_table td {
+		padding-top: 10px;
+		padding-bottom: 30px;
+		display: block;
+	}
+	#select_bill_table tr {
+		display: block;
+	}
+
+	.visible_five_fifty {
+		display: block;
 	}
 }
 
