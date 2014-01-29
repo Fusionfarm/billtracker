@@ -63,7 +63,7 @@ $(window).hashchange( function(){
 	hash_uppercase = hash_not_proper.toUpperCase()
 
 	// Set the page title based on the hash.
-	document.title = 'Iowa Bill Tracker: ' + ( hash_not_proper || '2014 Legislature' );
+	document.title = 'Iowa Bill Tracker: ' + ( hash_not_proper || '2013 Legislature' );
 
 	// Iterate over all links
     $('.bill_float_wrap a').each(function(){
@@ -180,7 +180,7 @@ $(window).hashchange( function(){
 		$('.loading_content').show();
 
 		// Load bill path info from JSON file
-		$.getJSON('http://billtracker.c3service.com/bills.js?callback=?', function(data){
+		$.getJSON('js/bills.js', function(data){
 			$.each(data, function(key, val) {
 				if (hash_not_proper === val.bill_id) {
 					// Check to see if we have a category listing on the page already
@@ -362,7 +362,7 @@ function loadListOfBills(){
 	select_bill_table += '<div class="headers_first_page">Or select a bill</div>';
 	select_bill_table += '<br /><table width="100%" id="select_bill_table">';
 
-	$.getJSON('http://billtracker.c3service.com/bills.js?callback=?', function(data){
+	$.getJSON('js/bills.js', function(data){
 		// This will look at the JSON file and see what bills have the topics selected
 		// It will then display those bills, as well as their status
 		$.each(data, function(key, val) {
@@ -406,7 +406,7 @@ function initialLoadJSON(topic) {
 	// console.log(topic_format);
 	
 	// Our JSON call will parse data and place on the page
-	$.getJSON('http://billtracker.c3service.com/bills.js?callback=?', function(data){
+	$.getJSON('js/bills.js', function(data){
 		// This will look at the JSON file and see what bills have the topics selected
 		// It will then display those bills, as well as their status
 		$.each(data, function(key, val) {
@@ -539,8 +539,10 @@ function loadJSON(billPath) {
 	vote_count_array_other_two = [];
 	updated_at = "";
 	
+	console.log(billPath);
+
 	// First JSON call grabs bill info from Open States site
-	$.getJSON('http://billtracker.c3service.com' + billPath + '/annotated.js?callback=?', function(data){
+	$.getJSON('js' + billPath + '/annotated.js', function(data){
 		$('#loading').hide();
 		// Run through the JSON file we called
 		// And pull out bill information we want
