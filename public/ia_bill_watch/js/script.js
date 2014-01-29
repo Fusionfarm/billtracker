@@ -86,12 +86,12 @@ $(window).hashchange( function(){
 		// Check to see if the icons have been loaded
 		// If not, load them
 		if ($('#agriculture').html() === '') {
-			// We'll hide the 'Select a bill' header 
+			// We'll hide the 'Select a bill' header
 			// BC we're loading it after the circles are placed on page
 			$('#select_a_bill').hide();
 			loadCategories();
 		}
-		
+
 		// Fade in first page stuff
 		$('#list_of_categories').fadeIn(200);
 		$('#list_of_categories2').fadeIn(200);
@@ -102,7 +102,7 @@ $(window).hashchange( function(){
 		$('#bill_content_init').html("<div class='loading_content_init'><h4 class='headers'>Loading...</h4></div><div id='bills_init'></div>");
 		$('#contents_header_categories').html();
 		$('#contents_header_bill_id').html('');
-		
+
 		// Clear out all the IDs in bill_content DIV
 		$('#billId').html('');
 		$('#chamber').html('');
@@ -122,7 +122,7 @@ $(window).hashchange( function(){
 		$('#list_of_categories2').hide();
 		$('#bill_content').hide();
 		$("#go_back_third_page").hide();
-		
+
 		// Clear out, refresh contents header topic DIV
 		// Get rid of bill ID in content header div
 		$('#contents_header_bill_id').html('');
@@ -130,7 +130,7 @@ $(window).hashchange( function(){
 		$('#contents_header_topic').html('');
 		$('#contents_header_topic').html('<a href="#' + hash_proper + '">' + hash_uppercase + '</a>')
 		$('#contents_header').fadeIn(200);
-		
+
 		// Show right DIV
 		$('#bill_content_init').fadeIn(200);
 		//$('.loading_content_init').show();
@@ -251,7 +251,7 @@ $('.votes_tables_buttons').live('click', function (e) {
 	// Add active class to current button
 	// Remove active class from other buttons in group
 	$(e.target).parent().addClass('active').siblings().removeClass('active');
-	
+
 	table_id = '.' + $(e.target).parent().attr('title');
 	$(table_id).show().siblings().hide();
 })
@@ -304,7 +304,7 @@ function loadCircles() {
 		circle.attr('opacity', '0');
 		img.attr('opacity', '0');
 		text.attr('opacity', '0');
-		circle.attr('fill', '#2ca6cb');
+		circle.attr('fill', '#4c87c7');
 		circle.attr('stroke', '#999999');
 		circle.attr('stroke-width', '1');
 		circle.attr('cursor', 'pointer');
@@ -336,7 +336,7 @@ function loadCircles() {
 		});
 		layer_group.click(function(e) {
 			// Find the DIV the circle is in and gets its id, which will be its topic
-			
+
 			// Find the topic name by finding the PNG file name of the attribute
 			// This will be the icons category: education, elections, etc.
 			if (this.attrs.src !== undefined) {
@@ -366,7 +366,7 @@ function loadListOfBills(){
 		// This will look at the JSON file and see what bills have the topics selected
 		// It will then display those bills, as well as their status
 		$.each(data, function(key, val) {
-				// console.log(key); 
+				// console.log(key);
 				// Break the table into fours
 					if (key % 4 === 0) {
 						select_bill_table += '<tr>';
@@ -398,13 +398,13 @@ function initialLoadJSON(topic) {
 	topics_headers = "";
 	billId_init = "";
 	bills_init = "";
-	
+
 	topics_headers = '';
 	topics_headers += '<h4 class="topics">' + topic_format + '</h4>';
 	topics_headers += '<hr class="headers_hr" />';
-	
+
 	// console.log(topic_format);
-	
+
 	// Our JSON call will parse data and place on the page
 	$.getJSON('http://billtracker.c3service.com/bills.js?callback=?', function(data){
 		// This will look at the JSON file and see what bills have the topics selected
@@ -419,7 +419,7 @@ function initialLoadJSON(topic) {
 					billId_init += '<div class="bill_outer"><div class="bill_float_wrap"><section>';
 					billId_init += '<h4 class="headers billId_buttons" id="' + val.bill_id + '" bill_path="' + val.bill_path + '">';
 					billId_init += '<a href="#' + val.bill_id + '">' + val.bill_id + '</a></h4>';
-					
+
 					// We'll add graphic on page depending on the bills status
 					// This loop will run if bill originated in the lower chamber
 					if (val.chamber !== null) {
@@ -448,7 +448,7 @@ function initialLoadJSON(topic) {
 								billId_init += '<div class="square_light_grey"></div><div class="square_light_grey"></div>';
 								billId_init += '<div class="passed_text">PASSED HOUSE</div>';
 								billId_init += '</td></tr></table></section>';
-							}	
+							}
 							// This loop will run if bill originated in the upper chamber
 						} else if (val.chamber === "upper") {
 							if (val.action_dates.passed_upper === null) {
@@ -478,7 +478,7 @@ function initialLoadJSON(topic) {
 							}
 						}
 					}
-					
+
 					if (val.action_dates !== null) {
 						// Crap to do to pull out date information
 						date_val_og =  val.action_dates.last.replace(' 00:00:00', '');
@@ -520,7 +520,7 @@ function loadJSON(billPath) {
 	topic_hash = $('#contents_header_topic a').attr('href');
 	$('#go_back_third_page a').attr('href', topic_hash);
 	$("#go_back_third_page").show();
-	
+
 	// First clear out our variables
 	billId = "";
 	description = "";
@@ -538,7 +538,7 @@ function loadJSON(billPath) {
 	vote_count_array_no_two = [];
 	vote_count_array_other_two = [];
 	updated_at = "";
-	
+
 	// First JSON call grabs bill info from Open States site
 	$.getJSON('http://billtracker.c3service.com' + billPath + '/annotated.js?callback=?', function(data){
 		$('#loading').hide();
@@ -554,22 +554,22 @@ function loadJSON(billPath) {
 				actions += '<td><div class="house_box">H</div>House</td>';
 				actions += '<td><div class="senate_box">S</div>Senate</td>';
 				actions += '</tr></table>';
-				
+
 				// Where we'll keep the action info
 				actionsHeader = '<table cellpadding="5px"><tbody>';
 				actionsBody = '';
 				actionsBody02 = '';
 				actionsFooter = '</tbody></table>';
-				
+
 				// Counter to break up actions into first table of 10
 				// Then second table with the rest of the actions
 				count_actions = 0;
-				
+
 				// Loop creates tbody info
 				// It loops in reverse, starting with the most recent action
 				for (var actions_num = val.length - 1; actions_num >= 0; actions_num--) {
 					count_actions += 1;
-					
+
 					if (count_actions < 11) {
 						actions01 = '<tr>';
 						// Holds date
@@ -583,7 +583,7 @@ function loadJSON(billPath) {
 						actions02 += ':</strong></td>';
 						// Holds chamber
 						actions03 = '<td>' + val[actions_num]['action'] + '</td>';
-						
+
 						// Add reporters notes for each action
 						if (val[actions_num]['text'] !== null && val[actions_num]['text'] !== "" && val[actions_num]['text'] !== " ") {
 							actions03 += '<td><div class="action_info_button" name="description_' + count_actions + '">';
@@ -649,14 +649,14 @@ function loadJSON(billPath) {
 				actions += actionsHeader + actionsBody + actionsFooter;
 				actions_second += actionsHeader + actionsBody02 + actionsFooter;
 			}
-			
+
 			// Title of the bill
 			if (key === 'title') {
 				description += '<h4 class="headers">Description</h4>';
 				description += '<div class="regular_text">' + val + '</div><br />';
 				description += "<div class='regular_text'><strong>Reporter's insight:</strong> " + data.reporter_description + '</div>';
 			}
-			
+
 			// Which chamber the bill originated in
 			// This will set up our thermometer graphic at the top of the page
 			if (key === 'chamber') {
@@ -742,7 +742,7 @@ function loadJSON(billPath) {
 				}
 				chamber += '</tr></table>';
 			}
-			
+
 			// Go through the sponsors
 			// And link to their pages on OpenStates website
 			if (key === 'sponsors' && data.sponsors[0].leg_id !== null) {
@@ -773,12 +773,12 @@ function loadJSON(billPath) {
 					// getLegInfo(legislators, val, number_of_sponsors);
 				}
 			}
-			
+
 			// When all this information was last updated
 			if (key === 'updated_at') {
 				updated_at += '<p><em>Updated at: ' + val + '</em></p>';
 			}
-			
+
 			// This allows people to read the different versions of the bills
 			// We'll create tables with links
 			if (key === 'versions') {
@@ -800,7 +800,7 @@ function loadJSON(billPath) {
 				}
 				sources += '</table>';
 			}
-			
+
 			// The bill number
 			if (key === 'bill_id') {
 				if (data.action_dates.signed === null) {
@@ -823,27 +823,27 @@ function loadJSON(billPath) {
 					billId += '</div>'
 				}
 			}
-			
+
 			// If the bill has been voted on, this will track how each legislator voted
 			count_votes = 0;
 			if (key === 'votes' && data.votes.length > 0){
 				$('#loading').fadeIn(200);
-				
+
 				// Only create this if we have votes recorded
 				// Create the header
 				votes += '<h4 class="headers">Votes</h4>';
 				// This will create our table
 				for (votes_num in val) {
 					count_votes += 1;
-					
-					// We'll break this in to two 
+
+					// We'll break this in to two
 					// if (count_votes < 2) {
-						
+
 					// First convert JSON date info to Javascript date
 					vote_date_val_og =  val[votes_num]['date'].replace(' 00:00:00', '');
 					vote_date_val = new Date(replaceAll(vote_date_val_og, '-', '/'));
 					vote_date_val.setDate(vote_date_val.getDate());
-					
+
 					current_vote_count = '';
 					current_vote_count += '<div>';
 					current_vote_count += '<h4 class="votes_headers">';
@@ -857,7 +857,7 @@ function loadJSON(billPath) {
 					}
 					current_vote_count += '</h4>';
 					current_vote_count += 'Motion: ' + val[votes_num].motion + ' <br />';
-							
+
 					// This determines if the bill passed
 					if (val[votes_num].passed === true) {
 						current_vote_count += ' <strong>The motion passed.</strong>';
@@ -873,11 +873,11 @@ function loadJSON(billPath) {
 						current_vote_count += '<li class="votes_tables_buttons" title="other_vote_number_' + votes_num + '">';
 						current_vote_count += '<a href="#">Other - ' + val[votes_num].other_count + '</a></li>';
 						current_vote_count += '</ul>';
-						
+
 						table_header_yes = '<table class="table table-striped yes_vote_number_' + votes_num + '">';
 						table_header_no = '<table class="table table-striped no_vote_number_' + votes_num + '" style="display: none;">';
 						table_header_other = '<table class="table table-striped other_vote_number_' + votes_num + '" style="display: none;">';
-							
+
 					} else if (val[votes_num].yes_count < val[votes_num].no_count) {
 						current_vote_count += '<br /><br /><ul class="nav nav-pills">';
 						current_vote_count += '<li class="votes_tables_buttons" title="yes_vote_number_' + votes_num + '">';
@@ -887,11 +887,11 @@ function loadJSON(billPath) {
 						current_vote_count += '<li class="votes_tables_buttons" title="other_vote_number_' + votes_num + '">';
 						current_vote_count += '<a href="#">Other - ' + val[votes_num].other_count + '</a></li>';
 						current_vote_count += '</ul>';
-						
+
 						table_header_yes = '<table class="table table-striped yes_vote_number_' + votes_num + '" style="display: none;">';
 						table_header_no = '<table class="table table-striped no_vote_number_' + votes_num + '">';
 						table_header_other = '<table class="table table-striped other_vote_number_' + votes_num + '" style="display: none;">';
-						
+
 					} else {
 						current_vote_count += '<br /><br /><ul class="nav nav-pills">';
 						current_vote_count += '<li class="votes_tables_buttons" title="yes_vote_number_' + votes_num + '">';
@@ -902,13 +902,13 @@ function loadJSON(billPath) {
 						current_vote_count += '<a href="#">Other - ' + val[votes_num].other_count + '</a></li>';
 						current_vote_count += '</ul>'; '</a></li>';
 						current_vote_count += '</ul>';
-						
+
 						table_header_yes = '<table class="table table-striped yes_vote_number_' + votes_num + '" style="display: none;">';
 						table_header_no = '<table class="table table-striped no_vote_number_' + votes_num + '" style="display: none;">';
 						table_header_other = '<table class="table table-striped other_vote_number_' + votes_num + '">';
 					}
 					current_vote_count += '</div>';
-					
+
 					table_header_one_yes = '<div class="votes_tables">';
 
 					table_header = '<thead><td><strong>Member</strong></td>';
@@ -924,20 +924,20 @@ function loadJSON(billPath) {
 						vote_count_array_no_two.push(table_header_no + table_header);
 						vote_count_array_other_two.push(table_header_other + table_header);
 					}
-					
+
 					// This will create the votes count tables
 					// And make call to our second JSON call to OpenStates with getLegInfoVotes();
 					// Which will pull legislator information
 					yes_votes = val[votes_num].yes_votes;
 					no_votes = val[votes_num].no_votes;
 					other_votes = val[votes_num].other_votes;
-					
+
 					number_of_legislators = yes_votes.length;
 					number_of_legislators_no = no_votes.length;
 					number_of_legislators_other = other_votes.length;
-					
+
 					number_of_votes = data.votes.length;
-					
+
 					// The getLegInfoVotes function makes a seperate call to the OpenStates API
 					// To pull legislator information
 					for (legislator_num in yes_votes) {
@@ -952,7 +952,7 @@ function loadJSON(billPath) {
 						legislators_who_voted = other_votes[legislator_num];
 						getLegInfoVotes(legislators_who_voted, legislator_num, number_of_legislators_other, votes_num, number_of_votes, 'other', count_votes);
 					}
-					
+
 				// }
 				}
 			}
@@ -979,12 +979,12 @@ function getLegInfoVotes(legislators_who_voted, legislator_num, number_of_legisl
 	// votes_num = current vote we are on (starts at 0)
 	// number_of_votes = number of votes total on a bill (starts at 1)
 	// yes_no = Whether or not the legislature voted yes or no
-	
+
 	var name = "";
 	var district = "";
 	var party = "";
 	var legChamber = "";
-	
+
 	// If the bill has a sponsor or sponsors
 	// We'll grab the legislator information from other URL
 	// Using the leg_id field in the original JSON file
@@ -992,10 +992,10 @@ function getLegInfoVotes(legislators_who_voted, legislator_num, number_of_legisl
 	if (legId != null) {
 		$.getJSON('http://openstates.org/api/v1/legislators/' + encodeURI(legId) + '/?apikey=' + encodeURI(apiKey) + '&callback=?', function(data){
 			// Global variables
-		
+
 			// Pull out the data from the legislators
 			$.each(data, function(key, val) {
-				
+
 				// console.log(key, ': ', val);
 				if (key === 'full_name') {
 					name = val;
@@ -1010,9 +1010,9 @@ function getLegInfoVotes(legislators_who_voted, legislator_num, number_of_legisl
 					id = val;
 				}
 			});
-			
+
 			votes_num = parseInt(votes_num);
-			
+
 			if (yes_no === 'yes' && count_votes < 2) {
 				vote_count_array_yes[votes_num] += '<tr><td><a href="http://openstates.org/ia/legislators/' + id + '" target="_blank">' + name + '</a></td><td>' + party + '</td><td>' + district + '</td></tr>';
 			} else if (yes_no === 'no' && count_votes < 2) {
@@ -1026,7 +1026,7 @@ function getLegInfoVotes(legislators_who_voted, legislator_num, number_of_legisl
 			} else if (yes_no === 'other' && count_votes >= 2) {
 				vote_count_array_other_two[votes_num - 1] += '<tr><td><a href="http://openstates.org/ia/legislators/' + id + '" target="_blank">' + name + '</a></td><td>' + party + '</td><td>' + district + '</td></tr>';
 			}
-			
+
 		})
 		.complete(
 			function() {
@@ -1043,7 +1043,7 @@ function getLegInfoVotes(legislators_who_voted, legislator_num, number_of_legisl
 // Get it on the page!
 function loadToPage(DOM_manipulation_check) {
 	$('.loading_content').hide();
-	
+
 	// We'll run this check to see if the call is coming from the getLegInfo or getLegInfoVotes functions
 	// If it coming from getLegInfoVotes, we only need to clear out the votes divs on the page and add content
 	// Otherwise it is coming from the initial loadJSON function and we need to clear everything out
@@ -1054,7 +1054,7 @@ function loadToPage(DOM_manipulation_check) {
 		$('#view_more_votes_button').hide();
 		$('#view_less_votes_button').hide();
 		$('#votes_second').hide();
-		
+
 		// Clear out DIVs
 		$('#billId').html('');
 		$('#chamber').html('');
@@ -1065,7 +1065,7 @@ function loadToPage(DOM_manipulation_check) {
 		$('#votes').html('');
 		$('#votes_second').html('');
 		$('#updated_at').html('');
-		
+
 		// Add to page
 		$('#billId').html(billId);
 		$('#chamber').html(chamber);
@@ -1076,7 +1076,7 @@ function loadToPage(DOM_manipulation_check) {
 		$('#sponsors').html(sponsors);
 		$('#updated_at').html(updated_at);
 	} else {
-		
+
 		// Clear out DIVs
 		$('#votes').html('');
 		$('#votes_second').html('');
@@ -1098,10 +1098,10 @@ function loadToPage(DOM_manipulation_check) {
 			votes_second += '</tbody></table></div>';
 		}
 		$('#loading').hide();
-		
+
 		// Add to page
 		$('#votes').html(votes);
-		
+
 		$('#votes_second').html(votes_second);
 		$('#view_more_votes_button').fadeIn(200);
 	}
