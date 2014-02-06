@@ -115,7 +115,7 @@ $(window).hashchange( function(){
 	// Second page stuff
 	// Check to make sure this isn't a bill and is instead a categories page
 	// Then load up the bills under that category
-	} else if (hash.slice(0,3) !== "#SF" && hash.slice(0,3) !== "#HF" && hash.slice(0,4) !== "#HSB" && hash.slice(0,4) !== "#SSB") {
+	} else if (hash.slice(0,3) !== "#SF" && hash.slice(0,3) !== "#HF" && hash.slice(0,4) !== "#HSB" && hash.slice(0,4) !== "#SSB" && hash.slice(0,4) !== "#HJR" && hash.slice(0,4) !== "#SJR") {
 		parent.postMessage("scroll_message","*");
 		// Hide first, third page stuff
 		$('#list_of_categories').hide();
@@ -151,7 +151,7 @@ $(window).hashchange( function(){
 	// Third page stuff
 	// When a user clicks a bill number, extensive bill information will be displayed
 	// Via second JSON call function
-	} else if (hash.slice(0,3) === "#SF" || hash.slice(0,3) === "#HF" || hash.slice(0,4) === "#HSB" || hash.slice(0,4) === "#SSB") {
+	} else if (hash.slice(0,3) === "#SF" || hash.slice(0,3) === "#HF" || hash.slice(0,4) === "#HSB" || hash.slice(0,4) === "#SSB" || hash.slice(0,4) === "#HJR" || hash.slice(0,4) === "#SJR") {
 		parent.postMessage("scroll_message","*");
 		// Info on action more, less buttons
 		$('#view_more_actions_button').hide();
